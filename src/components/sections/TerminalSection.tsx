@@ -2,6 +2,8 @@ import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
 import type { CmsSection } from '../../types/cms'
 import type { TerminalAsset } from '../../types/sections'
+import { emitToast } from '../../utils/toast'
+import { playEagleSound } from '../../utils/sound'
 
 interface TerminalSectionProps {
   section: CmsSection
@@ -22,7 +24,9 @@ interface SimulationProps {
   timeframe: string
   showPrimeSpike: boolean
   showRadar: boolean
+  soundEnabled: boolean
   registerTrigger: (trigger: (() => void) | null) => void
+  onPriceUpdate?: (price: number) => void
 }
 
 function buildSeries(asset: TerminalAsset): number[] {
@@ -42,7 +46,9 @@ function TerminalSimulation({
   timeframe,
   showPrimeSpike,
   showRadar,
+  soundEnabled,
   registerTrigger,
+  onPriceUpdate,
 }: SimulationProps) {
   const canvasRef = useRef<HTMLCanvasElement | null>(null)
   const spikeCounter = useRef(0)
@@ -61,7 +67,9 @@ function TerminalSimulation({
 
       setSeries((prev) => {
         const last = prev[prev.length - 1] ?? asset.base
-        return [...prev.slice(1), last + magnitude]
+        const nextPrice = last + magnitude
+        onPriceUpdate?.(nextPrice)
+        return [...prev.slice(1), nextPrice]
       })
 
       spikeId.current += 1
@@ -70,14 +78,16 @@ function TerminalSimulation({
         { id: spikeId.current, index: SERIES_LENGTH - 1, direction, points },
       ])
 
+      playEagleSound('spike', soundEnabled)
+
       setBanner(
-        `SPIKE DETECTED ON ${asset.label} · ${direction === 'up' ? '+' : '-'}${points} POINTS CAPTURED`,
+        `EAGLE VIX SPIKE DETECTED ON ${asset.label} · ${direction === 'up' ? '+' : '-'}${points} POINTS CAPTURED`,
       )
       setProbability(Math.min(99.9, 94 + Math.random() * 5))
 
       setTimeout(() => setBanner(null), 4200)
     },
-    [asset],
+    [asset, soundEnabled, onPriceUpdate],
   )
 
   useEffect(() => {
@@ -99,6 +109,7 @@ function TerminalSimulation({
         if (prev.length === 0) return prev
         const last = prev[prev.length - 1]
         const next = last + (Math.random() - 0.49) * asset.volatility * 0.7 + asset.drift * 0.2
+        onPriceUpdate?.(next)
         return [...prev.slice(1), next]
       })
 
@@ -107,7 +118,7 @@ function TerminalSimulation({
     }, 260)
 
     return () => clearInterval(interval)
-  }, [asset, fireSpike])
+  }, [asset, fireSpike, onPriceUpdate])
 
   const price = series.length ? series[series.length - 1] : asset.base
 
@@ -128,85 +139,120 @@ function TerminalSimulation({
     context.clearRect(0, 0, width, height)
 
     const padding = { top: 24, right: 24, bottom: 30, left: 24 }
-    const chartWidth = width - padding.left - padding.right
-    const chartHeight = height - padding.top - padding.bottom
-
-    context.strokeStyle = 'rgba(233, 238, 246, 0.07)'
-    context.lineWidth = 1
-    for (let i = 0; i <= 5; i += 1) {
-      const y = padding.top + (chartHeight / 5) * i
-      context.beginPath()
-      context.moveTo(padding.left, y)
-      context.lineTo(padding.left + chartWidth, y)
-      context.stroke()
-    }
-    for (let i = 0; i <= 6; i += 1) {
-      const x = padding.left + (chartWidth / 6) * i
-      context.beginPath()
-      context.moveTo(x, padding.top)
-      context.lineTo(x, padding.top + chartHeight)
-      context.stroke()
-    }
-
-    if (series.length < 2) return
+    const plotWidth = width - padding.left - padding.right
+    const plotHeight = height - padding.top - padding.bottom
 
     const min = Math.min(...series)
     const max = Math.max(...series)
-    const span = max - min || 1
-    const xFor = (index: number) => padding.left + (chartWidth / (series.length - 1)) * index
-    const yFor = (value: number) => padding.top + chartHeight - ((value - min) / span) * chartHeight
+    const span = Math.max(1, max - min)
 
-    const gradient = context.createLinearGradient(0, padding.top, 0, padding.top + chartHeight)
-    gradient.addColorStop(0, 'rgba(34, 211, 238, 0.28)')
-    gradient.addColorStop(1, 'rgba(34, 211, 238, 0)')
+    // Background Subtle Grid Lines
+    context.strokeStyle = 'rgba(233, 238, 246, 0.05)'
+    context.lineWidth = 1
+
+    for (let i = 0; i < 5; i += 1) {
+      const y = padding.top + (plotHeight / 4) * i
+      context.beginPath()
+      context.moveTo(padding.left, y)
+      context.lineTo(width - padding.right, y)
+      context.stroke()
+
+      const levelPrice = max - (span / 4) * i
+      context.fillStyle = 'rgba(139, 152, 171, 0.5)'
+      context.font = '10px jetbrains-mono, monospace'
+      context.fillText(levelPrice.toFixed(1), width - padding.right - 54, y - 4)
+    }
+
+    // Chart Gradient Fill
+    const gradient = context.createLinearGradient(0, padding.top, 0, height - padding.bottom)
+    gradient.addColorStop(0, 'rgba(0, 240, 255, 0.22)')
+    gradient.addColorStop(0.5, 'rgba(14, 165, 233, 0.08)')
+    gradient.addColorStop(1, 'rgba(14, 165, 233, 0)')
 
     context.beginPath()
-    context.moveTo(xFor(0), padding.top + chartHeight)
-    series.forEach((value, index) => context.lineTo(xFor(index), yFor(value)))
-    context.lineTo(xFor(series.length - 1), padding.top + chartHeight)
+    series.forEach((val, index) => {
+      const x = padding.left + (plotWidth / (series.length - 1)) * index
+      const y = padding.top + plotHeight - ((val - min) / span) * plotHeight
+      if (index === 0) {
+        context.moveTo(x, y)
+      } else {
+        context.lineTo(x, y)
+      }
+    })
+
+    context.lineTo(padding.left + plotWidth, padding.top + plotHeight)
+    context.lineTo(padding.left, padding.top + plotHeight)
     context.closePath()
     context.fillStyle = gradient
     context.fill()
 
+    // Price Line
     context.beginPath()
-    series.forEach((value, index) => {
-      const x = xFor(index)
-      const y = yFor(value)
-      if (index === 0) context.moveTo(x, y)
-      else context.lineTo(x, y)
+    series.forEach((val, index) => {
+      const x = padding.left + (plotWidth / (series.length - 1)) * index
+      const y = padding.top + plotHeight - ((val - min) / span) * plotHeight
+      if (index === 0) {
+        context.moveTo(x, y)
+      } else {
+        context.lineTo(x, y)
+      }
     })
-    context.strokeStyle = '#22d3ee'
+    context.strokeStyle = '#00F0FF'
     context.lineWidth = 2
     context.stroke()
 
+    // Current Price Pulsing Dot
+    if (series.length > 0) {
+      const lastX = padding.left + plotWidth
+      const lastY = padding.top + plotHeight - ((series[series.length - 1] - min) / span) * plotHeight
+
+      context.fillStyle = '#00F0FF'
+      context.beginPath()
+      context.arc(lastX, lastY, 4, 0, Math.PI * 2)
+      context.fill()
+
+      context.strokeStyle = 'rgba(0, 240, 255, 0.5)'
+      context.lineWidth = 1.5
+      context.beginPath()
+      context.arc(lastX, lastY, 8, 0, Math.PI * 2)
+      context.stroke()
+    }
+
+    // Eagle Vix Spike Indicators
     if (showPrimeSpike) {
       spikes.forEach((spike) => {
-        const index = Math.min(spike.index, series.length - 1)
-        const x = xFor(index)
-        const y = yFor(series[index] ?? 0)
-        const color = spike.direction === 'up' ? '#34d399' : '#fb7185'
+        const x = padding.left + (plotWidth / (series.length - 1)) * spike.index
+        const val = series[spike.index] ?? min
+        const y = padding.top + plotHeight - ((val - min) / span) * plotHeight
 
-        context.fillStyle = color
+        context.fillStyle = spike.direction === 'up' ? '#34d399' : '#fb7185'
         context.beginPath()
-        context.moveTo(x, y - 10)
-        context.lineTo(x - 7, y - 24)
-        context.lineTo(x + 7, y - 24)
+        if (spike.direction === 'up') {
+          context.moveTo(x, y - 20)
+          context.lineTo(x - 7, y - 8)
+          context.lineTo(x + 7, y - 8)
+        } else {
+          context.moveTo(x, y + 20)
+          context.lineTo(x - 7, y + 8)
+          context.lineTo(x + 7, y + 8)
+        }
         context.closePath()
         context.fill()
 
-        context.strokeStyle = color
-        context.lineWidth = 1
+        context.strokeStyle = spike.direction === 'up' ? '#34d399' : '#fb7185'
+        context.lineWidth = 1.5
         context.beginPath()
         context.moveTo(x, y - 24)
         context.lineTo(x, y - 36)
         context.stroke()
 
-        context.fillStyle = 'rgba(233, 238, 246, 0.85)'
-        context.font = '10px jetbrains-mono, monospace'
-        context.fillText('ENTRY', x - 14, y - 42)
+        context.fillStyle = 'rgba(233, 238, 246, 0.95)'
+        context.font = 'bold 10px jetbrains-mono, monospace'
+        context.fillText('EVIX SPIKE', x - 24, y - 42)
       })
     }
 
+    // Radar Gauge
     if (showRadar) {
       const cx = width - padding.right - 62
       const cy = padding.top + 62
@@ -253,7 +299,7 @@ function TerminalSimulation({
         {banner && <div className="terminal__banner">{banner}</div>}
 
         <div className="terminal__hud">
-          <div className="terminal__hud-title">Spike Radar HUD</div>
+          <div className="terminal__hud-title">EAGLE VIX Radar HUD</div>
           {hudRows.map((row) => (
             <div key={row.key} className="terminal__hud-row">
               <span className="terminal__hud-key">{row.key}</span>
@@ -269,8 +315,8 @@ function TerminalSimulation({
 
       <div className="terminal__footer">
         <span>
-          {asset.label} Index · Tick Price: {price.toFixed(2)} · Spread: 0.05 Pts · Spike Probability:{' '}
-          {probability.toFixed(1)}% · VPS Bridge 14ms · {timeframe}
+          {asset.label} Index · Tick: {price.toFixed(2)} · Spread: 0.05 Pts · Spike Probability:{' '}
+          {probability.toFixed(1)}% · VPS Bridge 12ms · {timeframe}
         </span>
         <span className="text-dim">Simulating real-time micro-tick liquidity clusters</span>
       </div>
@@ -286,6 +332,15 @@ export default function TerminalSection({ section }: TerminalSectionProps) {
   const [timeframe, setTimeframe] = useState('M1')
   const [showPrimeSpike, setShowPrimeSpike] = useState(true)
   const [showRadar, setShowRadar] = useState(true)
+  const [soundEnabled, setSoundEnabled] = useState(true)
+  const [livePrice, setLivePrice] = useState(0)
+  const [simPosition, setSimPosition] = useState<{
+    type: 'BUY' | 'SELL'
+    entry: number
+    lot: number
+    assetLabel: string
+  } | null>(null)
+
   const triggerRef = useRef<(() => void) | null>(null)
 
   const asset = assets[assetIndex] ?? assets[0]
@@ -294,6 +349,59 @@ export default function TerminalSection({ section }: TerminalSectionProps) {
   }, [])
 
   if (!asset) return null
+
+  const livePnL = simPosition
+    ? (simPosition.type === 'BUY'
+        ? (livePrice - simPosition.entry)
+        : (simPosition.entry - livePrice)) * simPosition.lot * 1.5
+    : 0
+
+  const handleOpenPosition = (type: 'BUY' | 'SELL') => {
+    playEagleSound('order', soundEnabled)
+    const entry = livePrice || asset.base
+    setSimPosition({
+      type,
+      entry,
+      lot: 2.0,
+      assetLabel: asset.label,
+    })
+    emitToast({
+      title: `${type} Position Executed`,
+      message: `Opened 2.0 Lots on ${asset.label} @ ${entry.toFixed(2)}`,
+      type: 'info',
+    })
+  }
+
+  const handleClosePosition = () => {
+    if (!simPosition) return
+    playEagleSound(livePnL >= 0 ? 'success' : 'click', soundEnabled)
+    const pnlFormatted = livePnL >= 0 ? `+$${livePnL.toFixed(2)}` : `-$${Math.abs(livePnL).toFixed(2)}`
+    emitToast({
+      title: 'Position Closed',
+      message: `Final Result: ${pnlFormatted} USD on ${simPosition.assetLabel}`,
+      type: livePnL >= 0 ? 'success' : 'amber',
+    })
+    setSimPosition(null)
+  }
+
+  const handleTakeSnapshot = () => {
+    playEagleSound('click', soundEnabled)
+    const textLog = `EAGLE VIX SOLUTIONS — TERMINAL SNAPSHOT
+Asset: ${asset.label}
+Timeframe: ${timeframe}
+Current Price: ${(livePrice || asset.base).toFixed(2)}
+Spike AI: ${showPrimeSpike ? 'Active' : 'Disabled'}
+Latency: 12ms VPS Bridge
+Simulated PnL: $${livePnL.toFixed(2)} USD
+Timestamp: ${new Date().toISOString()}`
+
+    navigator.clipboard?.writeText(textLog)
+    emitToast({
+      title: 'Snapshot Log Copied',
+      message: 'Terminal telemetry copied to clipboard. Ready to export.',
+      type: 'success',
+    })
+  }
 
   return (
     <section className="section section--spacious">
@@ -306,7 +414,10 @@ export default function TerminalSection({ section }: TerminalSectionProps) {
                   key={item.id}
                   type="button"
                   className={`chip${assetIndex === index ? ' is-active' : ''}`}
-                  onClick={() => setAssetIndex(index)}
+                  onClick={() => {
+                    playEagleSound('click', soundEnabled)
+                    setAssetIndex(index)
+                  }}
                 >
                   {item.label}
                 </button>
@@ -319,7 +430,10 @@ export default function TerminalSection({ section }: TerminalSectionProps) {
                   key={frame}
                   type="button"
                   className={`chip${timeframe === frame ? ' is-active' : ''}`}
-                  onClick={() => setTimeframe(frame)}
+                  onClick={() => {
+                    playEagleSound('click', soundEnabled)
+                    setTimeframe(frame)
+                  }}
                 >
                   {frame}
                 </button>
@@ -330,16 +444,33 @@ export default function TerminalSection({ section }: TerminalSectionProps) {
               <button
                 type="button"
                 className={`chip${showPrimeSpike ? ' is-active' : ''}`}
-                onClick={() => setShowPrimeSpike((value) => !value)}
+                onClick={() => {
+                  playEagleSound('click', soundEnabled)
+                  setShowPrimeSpike((value) => !value)
+                }}
               >
                 Prime Spike AI
               </button>
               <button
                 type="button"
                 className={`chip${showRadar ? ' is-active' : ''}`}
-                onClick={() => setShowRadar((value) => !value)}
+                onClick={() => {
+                  playEagleSound('click', soundEnabled)
+                  setShowRadar((value) => !value)
+                }}
               >
                 Radar HUD
+              </button>
+              <button
+                type="button"
+                className={`chip${soundEnabled ? ' is-active' : ''}`}
+                onClick={() => {
+                  setSoundEnabled((v) => !v)
+                  playEagleSound('click', !soundEnabled)
+                }}
+                title="Toggle Web Audio Sound"
+              >
+                {soundEnabled ? '🔊 Sound: ON' : '🔇 Sound: OFF'}
               </button>
             </div>
           </div>
@@ -350,23 +481,86 @@ export default function TerminalSection({ section }: TerminalSectionProps) {
             timeframe={timeframe}
             showPrimeSpike={showPrimeSpike}
             showRadar={showRadar}
+            soundEnabled={soundEnabled}
             registerTrigger={registerTrigger}
+            onPriceUpdate={setLivePrice}
           />
+
+          {/* Interactive Live Paper Trading Bar */}
+          <div className="terminal__trade-bar">
+            <div className="terminal__trade-info">
+              <span className="fs-mono text-dim">Virtual Execution Desk:</span>
+              {simPosition ? (
+                <span
+                  className={`terminal__pnl-badge ${livePnL >= 0 ? 'text-green' : 'text-amber'}`}
+                  style={{ fontWeight: 'bold' }}
+                >
+                  {simPosition.type} 2.0 Lots @ {simPosition.entry.toFixed(2)} | PnL: {livePnL >= 0 ? '+' : ''}${livePnL.toFixed(2)} USD
+                </span>
+              ) : (
+                <span className="text-dim">No open orders. Select direction to paper test:</span>
+              )}
+            </div>
+
+            <div className="terminal__trade-actions">
+              {!simPosition ? (
+                <>
+                  <button
+                    type="button"
+                    className="button"
+                    style={{ background: '#059669', borderColor: '#10B981', padding: '0.5rem 1.2rem' }}
+                    onClick={() => handleOpenPosition('BUY')}
+                  >
+                    ▲ BUY SPIKE (2.0)
+                  </button>
+                  <button
+                    type="button"
+                    className="button"
+                    style={{ background: '#DC2626', borderColor: '#EF4444', padding: '0.5rem 1.2rem' }}
+                    onClick={() => handleOpenPosition('SELL')}
+                  >
+                    ▼ SELL SPIKE (2.0)
+                  </button>
+                </>
+              ) : (
+                <button
+                  type="button"
+                  className="button button--ghost"
+                  style={{ borderColor: '#F59E0B', color: '#FCD34D' }}
+                  onClick={handleClosePosition}
+                >
+                  ✕ Close Position ({livePnL >= 0 ? '+' : ''}${livePnL.toFixed(2)})
+                </button>
+              )}
+            </div>
+          </div>
 
           <div className="terminal__footer">
             <span className="text-dim">
-              Simulating real-time micro-tick liquidity clusters. Works identically on live MT5
-              terminals.
+              EAGLE VIX SOLUTIONS micro-tick algorithm stream. Ready for deployment on live MT5 terminals.
             </span>
             <div className="terminal__toolbar-group">
               <button
                 type="button"
-                className="button"
-                onClick={() => triggerRef.current?.()}
+                className="button button--ghost"
+                onClick={handleTakeSnapshot}
               >
-                Force Test Spike
+                📷 Snapshot Log
               </button>
-              <Link className="button button--ghost" to="/indicators">
+              <button
+                type="button"
+                className="button"
+                onClick={() => {
+                  triggerRef.current?.()
+                }}
+              >
+                ⚡ Force Test Spike
+              </button>
+              <Link
+                className="button button--ghost"
+                to="/indicators"
+                onClick={() => playEagleSound('click', soundEnabled)}
+              >
                 Install on your MT5
               </Link>
             </div>

@@ -1,6 +1,6 @@
 ﻿{
     "slug":  "terminal",
-    "title":  "Live MT5 Spike Detection Terminal | Treads Algo",
+    "title":  "Live MT5 Spike Detection Terminal | EAGLE VIX SOLUTIONS",
     "description":  "Real-time tick-by-tick mathematical cluster simulation. Observe how indicators execute before spikes print on Boom, Crash and synthetic indices.",
     "heroImage":  "/images/hero-terminal.jpg",
     "heroImageAlt":  "Algorithmic trading charts on a MetaTrader 5 terminal",
@@ -107,3 +107,4 @@
                      }
                  ]
 }
+

@@ -1,6 +1,8 @@
 import { useState } from 'react'
 import type { CmsSection } from '../../types/cms'
 import type { LicenseItem } from '../../types/sections'
+import { emitToast } from '../../utils/toast'
+import { playEagleSound } from '../../utils/sound'
 
 interface LicenseManagerSectionProps {
   section: CmsSection
@@ -8,12 +10,69 @@ interface LicenseManagerSectionProps {
 
 export default function LicenseManagerSection({ section }: LicenseManagerSectionProps) {
   const payload = section as unknown as { licenses?: LicenseItem[] }
-  const licenses = payload.licenses ?? []
+  const initialLicenses = payload.licenses ?? []
+  const [licenses, setLicenses] = useState<LicenseItem[]>(initialLicenses)
   const [notice, setNotice] = useState<string | null>(null)
 
   const resetHwid = (license: LicenseItem) => {
-    setNotice(`Hardware ID reset! You can now activate ${license.name} on your new VPS or MT5 device.`)
-    setTimeout(() => setNotice(null), 6000)
+    playEagleSound('reset')
+    const updated = licenses.map((item) => {
+      if (item.key === license.key) {
+        return {
+          ...item,
+          hwid: 'UNBOUND — Ready for new VPS / Machine',
+          status: 'UNBOUND',
+        }
+      }
+      return item
+    })
+    setLicenses(updated)
+
+    const msg = `Hardware binding for ${license.name} has been released. Next MT5 launch will auto-bind to your active device.`
+    setNotice(msg)
+    emitToast({
+      title: 'HWID Reset Confirmed',
+      message: msg,
+      type: 'success',
+    })
+
+    setTimeout(() => setNotice(null), 7000)
+  }
+
+  const downloadPackage = (license: LicenseItem) => {
+    playEagleSound('success')
+    const content = `EAGLE VIX SOLUTIONS — MT5 LICENSED PACKAGE
+=====================================================
+Indicator: ${license.name}
+License Key: ${license.key}
+Registered HWID: ${license.hwid}
+Build: EAGLE VIX 2026.10-PRO (MetaTrader 5 Win64)
+Server: auth.eaglevixsolutions.com:443
+
+INSTRUCTIONS:
+1. Place the included .ex5 file in:
+   MetaTrader 5 / MQL5 / Indicators
+2. Drag onto chart (M1 or M5 Boom/Crash or Weltrade).
+3. Paste key "${license.key}" in the license parameters.
+
+Support: support@eaglevixsolutions.com
+=====================================================`
+
+    const blob = new Blob([content], { type: 'text/plain;charset=utf-8' })
+    const url = URL.createObjectURL(blob)
+    const link = document.createElement('a')
+    link.href = url
+    link.download = `${license.name.replace(/\s+/g, '_')}_MT5_Package.txt`
+    document.body.appendChild(link)
+    link.click()
+    document.body.removeChild(link)
+    URL.revokeObjectURL(url)
+
+    emitToast({
+      title: 'Download Started',
+      message: `${license.name} installer bundle package saved to your device.`,
+      type: 'success',
+    })
   }
 
   return (
@@ -21,9 +80,9 @@ export default function LicenseManagerSection({ section }: LicenseManagerSection
       <div className="shell">
         <div className="stack stack--lg">
           <div className="section__header section__header--left">
-            <span className="eyebrow">
+            <span className="eyebrow eyebrow--amber">
               <span className="eyebrow__dot" />
-              Authenticated client terminal
+              EAGLE VIX SOLUTIONS · Authenticated Client Terminal
             </span>
             <h2>My active licences</h2>
             <p>
@@ -41,7 +100,7 @@ export default function LicenseManagerSection({ section }: LicenseManagerSection
 
           <div className="stack stack--sm">
             {licenses.map((license) => (
-              <div key={license.key} className="license-card">
+              <div key={license.key} className="license-card eagle-card-glow">
                 <div>
                   <div className="license-card__name">{license.name}</div>
                   <div className="license-card__key">{license.key}</div>
@@ -49,11 +108,21 @@ export default function LicenseManagerSection({ section }: LicenseManagerSection
                 </div>
 
                 <div className="cluster" style={{ alignItems: 'center' }}>
-                  <span className="pill-status">{license.status}</span>
-                  <button type="button" className="button button--ghost" onClick={() => resetHwid(license)}>
+                  <span className={`pill-status${license.status === 'UNBOUND' ? ' text-green' : ''}`}>
+                    {license.status}
+                  </span>
+                  <button
+                    type="button"
+                    className="button button--ghost"
+                    onClick={() => resetHwid(license)}
+                  >
                     Reset HWID
                   </button>
-                  <button type="button" className="button button--ghost">
+                  <button
+                    type="button"
+                    className="button button--ghost"
+                    onClick={() => downloadPackage(license)}
+                  >
                     Download .EX5 Package (.ZIP)
                   </button>
                 </div>
@@ -86,7 +155,7 @@ export default function LicenseManagerSection({ section }: LicenseManagerSection
                 </svg>
               </span>
               <div>
-                <div className="guarantee__title">Build 2026.10-PRO</div>
+                <div className="guarantee__title">EAGLE VIX Build 2026.10-PRO</div>
                 <p className="guarantee__text">
                   Every package ships with the current MT5 build, the installation manual and
                   pre-calibrated preset templates.
@@ -98,14 +167,13 @@ export default function LicenseManagerSection({ section }: LicenseManagerSection
               <span className="guarantee__icon">
                 <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" aria-hidden="true">
                   <path d="M4 5h16v14H4z" />
-                  <path d="M8 9h8M8 13h5" />
+                  <path d="M4 10h16" />
                 </svg>
               </span>
               <div>
-                <div className="guarantee__title">PDF manual &amp; presets</div>
+                <div className="guarantee__title">Instant cloud key validation</div>
                 <p className="guarantee__text">
-                  Download the full manual and .set preset bundle, or ask the VIP desk to install
-                  the package for you.
+                  Sub-millisecond authentication ping against EAGLE VIX SOLUTIONS global licensing nodes.
                 </p>
               </div>
             </div>

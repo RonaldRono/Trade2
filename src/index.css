@@ -1,6 +1,525 @@
 @import "/tread-original.css";
 @import "/tread-page.css";
 
+/* ========================================================
+   EAGLE VIX SOLUTIONS — ENHANCED THEME, ANIMATIONS & FEATURES
+   ======================================================== */
+
+:root {
+  --eagle-cyan: #00F0FF;
+  --eagle-cyan-glow: rgba(0, 240, 255, 0.35);
+  --eagle-gold: #F59E0B;
+  --eagle-gold-light: #FCD34D;
+  --eagle-gold-glow: rgba(245, 158, 11, 0.35);
+  --eagle-emerald: #10B981;
+  --eagle-surface: #090E17;
+  --eagle-surface-glass: rgba(9, 14, 23, 0.88);
+  --eagle-border: rgba(255, 255, 255, 0.08);
+}
+
 #root {
   min-height: 100%;
+  position: relative;
+}
+
+/* Background Subtle Neural Grid Ambient Glow */
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: 
+    radial-gradient(circle at 15% 20%, rgba(0, 240, 255, 0.035) 0%, transparent 40%),
+    radial-gradient(circle at 85% 80%, rgba(245, 158, 11, 0.03) 0%, transparent 45%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Card Glow & Modern Hover Animations */
+.eagle-card-glow {
+  position: relative;
+  transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.28s ease, border-color 0.28s ease;
+}
+
+.eagle-card-glow:hover {
+  transform: translateY(-4px);
+  border-color: rgba(0, 240, 255, 0.38) !important;
+  box-shadow: 0 14px 34px -10px rgba(0, 240, 255, 0.16), 0 0 1px rgba(0, 240, 255, 0.5) inset;
+}
+
+/* Enhanced Buttons with Shimmer & Fluid Clicks */
+.button {
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.16s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+  user-select: none;
+}
+
+.button:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 14px rgba(0, 240, 255, 0.25);
+}
+
+.button:active {
+  transform: translateY(1px) scale(0.98);
+}
+
+.action:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(0, 240, 255, 0.2);
+}
+
+/* Terminal Virtual Paper Trading Bar */
+.terminal__trade-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1.2rem;
+  padding: 1.2rem 2rem;
+  background: rgba(10, 16, 28, 0.95);
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.terminal__trade-info {
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+  font-size: 1.3rem;
+}
+
+.terminal__trade-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+}
+
+.terminal__pnl-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.3rem 0.8rem;
+  border-radius: 4px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid currentColor;
+  animation: pulseGlow 1.8s infinite;
+}
+
+@keyframes pulseGlow {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.75; }
+}
+
+/* Toast Notifications System */
+.eagle-toast-container {
+  position: fixed;
+  top: 2rem;
+  right: 2rem;
+  z-index: 99999;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  max-width: 420px;
+  width: calc(100vw - 4rem);
+  pointer-events: none;
+}
+
+.eagle-toast {
+  pointer-events: auto;
+  display: flex;
+  align-items: flex-start;
+  gap: 1.2rem;
+  padding: 1.4rem 1.6rem;
+  background: rgba(10, 15, 26, 0.94);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.5), 0 0 12px rgba(0, 240, 255, 0.12);
+  color: #E9EEF6;
+  cursor: pointer;
+  animation: toastIn 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.eagle-toast:hover {
+  transform: translateY(-2px);
+}
+
+.eagle-toast--success {
+  border-left: 4px solid #10B981;
+}
+
+.eagle-toast--info {
+  border-left: 4px solid #00F0FF;
+}
+
+.eagle-toast--amber {
+  border-left: 4px solid #F59E0B;
+}
+
+.eagle-toast--error {
+  border-left: 4px solid #EF4444;
+}
+
+.eagle-toast__icon {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.08);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  font-weight: bold;
+  flex-shrink: 0;
+}
+
+.eagle-toast--success .eagle-toast__icon {
+  color: #10B981;
+  background: rgba(16, 185, 129, 0.15);
+}
+
+.eagle-toast--info .eagle-toast__icon {
+  color: #00F0FF;
+  background: rgba(0, 240, 255, 0.15);
+}
+
+.eagle-toast--amber .eagle-toast__icon {
+  color: #F59E0B;
+  background: rgba(245, 158, 11, 0.15);
+}
+
+.eagle-toast__content {
+  flex: 1;
+}
+
+.eagle-toast__title {
+  font-family: 'jetbrains-mono', monospace;
+  font-weight: 700;
+  font-size: 1.3rem;
+  margin-bottom: 0.3rem;
+}
+
+.eagle-toast__message {
+  font-size: 1.2rem;
+  color: #8B98AB;
+  line-height: 1.4;
+}
+
+.eagle-toast__close {
+  background: transparent;
+  border: none;
+  color: #64748B;
+  font-size: 1.2rem;
+  cursor: pointer;
+  padding: 0.2rem;
+}
+
+.eagle-toast__close:hover {
+  color: #E9EEF6;
+}
+
+@keyframes toastIn {
+  from {
+    opacity: 0;
+    transform: translateY(-12px) scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* Floating EAGLE VIX VIP Trading Desk Assistant */
+.eagle-desk-launcher {
+  position: fixed;
+  bottom: 2.2rem;
+  right: 2.2rem;
+  z-index: 9999;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.8rem;
+  padding: 0.9rem 1.6rem;
+  background: linear-gradient(135deg, #0A0F1D 0%, #0F172A 100%);
+  border: 1px solid rgba(0, 240, 255, 0.4);
+  border-radius: 9999px;
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.6), 0 0 18px rgba(0, 240, 255, 0.2);
+  color: #FFFFFF;
+  cursor: pointer;
+  transition: all 0.24s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.eagle-desk-launcher:hover {
+  transform: translateY(-3px) scale(1.02);
+  box-shadow: 0 14px 36px rgba(0, 0, 0, 0.7), 0 0 24px rgba(0, 240, 255, 0.35);
+  border-color: #00F0FF;
+}
+
+.eagle-desk-launcher__pulse {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: #10B981;
+  box-shadow: 0 0 10px #10B981;
+  animation: pulseDot 1.6s infinite;
+}
+
+@keyframes pulseDot {
+  0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7); }
+  70% { transform: scale(1.15); box-shadow: 0 0 0 8px rgba(16, 185, 129, 0); }
+  100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
+}
+
+.eagle-desk-launcher__icon {
+  font-size: 1.6rem;
+}
+
+.eagle-desk-launcher__label {
+  font-family: 'jetbrains-mono', monospace;
+  font-weight: 700;
+  font-size: 1.15rem;
+  letter-spacing: 0.8px;
+}
+
+.eagle-desk-launcher__badge {
+  font-family: 'jetbrains-mono', monospace;
+  font-size: 0.95rem;
+  font-weight: 800;
+  padding: 0.2rem 0.5rem;
+  border-radius: 4px;
+  background: rgba(16, 185, 129, 0.2);
+  color: #34D399;
+  border: 1px solid rgba(16, 185, 129, 0.4);
+}
+
+/* Live Desk Panel Drawer */
+.eagle-desk-panel {
+  position: fixed;
+  bottom: 6.8rem;
+  right: 2.2rem;
+  width: 440px;
+  max-width: calc(100vw - 3rem);
+  height: 600px;
+  max-height: calc(100vh - 10rem);
+  background: #070B14;
+  border: 1px solid rgba(0, 240, 255, 0.25);
+  border-radius: 14px;
+  box-shadow: 0 24px 64px rgba(0, 0, 0, 0.8), 0 0 32px rgba(0, 240, 255, 0.12);
+  z-index: 10000;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  animation: toastIn 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.eagle-desk-panel__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.4rem 1.8rem;
+  background: #0A0F1D;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.eagle-desk-panel__title {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  font-family: 'jetbrains-mono', monospace;
+  font-weight: 800;
+  font-size: 1.3rem;
+  color: #FFFFFF;
+}
+
+.eagle-desk-panel__status {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-size: 1.1rem;
+  color: #8B98AB;
+  margin-top: 0.2rem;
+}
+
+.eagle-desk-panel__dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #10B981;
+  box-shadow: 0 0 6px #10B981;
+}
+
+.eagle-desk-panel__close {
+  background: transparent;
+  border: none;
+  color: #8B98AB;
+  font-size: 1.4rem;
+  cursor: pointer;
+  padding: 0.4rem;
+}
+
+.eagle-desk-panel__close:hover {
+  color: #FFFFFF;
+}
+
+.eagle-desk-panel__body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 1.6rem;
+  overflow-y: auto;
+  gap: 1.4rem;
+}
+
+.eagle-desk-panel__messages {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+  flex: 1;
+}
+
+.eagle-desk-msg {
+  display: flex;
+  flex-direction: column;
+  max-width: 86%;
+}
+
+.eagle-desk-msg--desk {
+  align-self: flex-start;
+}
+
+.eagle-desk-msg--user {
+  align-self: flex-end;
+}
+
+.eagle-desk-msg__meta {
+  font-family: 'jetbrains-mono', monospace;
+  font-size: 1rem;
+  color: #64748B;
+  margin-bottom: 0.4rem;
+  display: flex;
+  gap: 0.8rem;
+}
+
+.eagle-desk-msg__bubble {
+  padding: 1rem 1.4rem;
+  border-radius: 10px;
+  font-size: 1.25rem;
+  line-height: 1.45;
+}
+
+.eagle-desk-msg--desk .eagle-desk-msg__bubble {
+  background: #121927;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  color: #E2E8F0;
+  border-bottom-left-radius: 2px;
+}
+
+.eagle-desk-msg--user .eagle-desk-msg__bubble {
+  background: linear-gradient(135deg, #0284C7 0%, #0369A1 100%);
+  color: #FFFFFF;
+  border-bottom-right-radius: 2px;
+}
+
+.eagle-desk-msg__typing {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.8rem 1.2rem;
+}
+
+.eagle-desk-msg__typing .dot {
+  width: 6px;
+  height: 6px;
+  background: #00F0FF;
+  border-radius: 50%;
+  animation: typing 1.4s infinite ease-in-out both;
+}
+
+.eagle-desk-msg__typing .dot:nth-child(1) { animation-delay: -0.32s; }
+.eagle-desk-msg__typing .dot:nth-child(2) { animation-delay: -0.16s; }
+
+@keyframes typing {
+  0%, 80%, 100% { transform: scale(0); opacity: 0.4; }
+  40% { transform: scale(1); opacity: 1; }
+}
+
+.eagle-desk-panel__presets {
+  margin-top: auto;
+  padding-top: 1rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.eagle-desk-panel__presets-title {
+  font-size: 1.1rem;
+  color: #8B98AB;
+  margin-bottom: 0.8rem;
+}
+
+.eagle-desk-panel__chips {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.eagle-desk-panel__chips .chip {
+  text-align: left;
+  font-size: 1.15rem;
+  padding: 0.5rem 0.9rem;
+}
+
+.eagle-desk-panel__footer {
+  display: flex;
+  gap: 0.8rem;
+  padding: 1.2rem 1.6rem;
+  background: #0A0F1D;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.eagle-desk-panel__input {
+  flex: 1;
+  background: #05080E;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 6px;
+  padding: 0.8rem 1.2rem;
+  color: #FFFFFF;
+  font-size: 1.25rem;
+}
+
+.eagle-desk-panel__input:focus {
+  outline: none;
+  border-color: #00F0FF;
+}
+
+/* Checkout Modal Styling */
+.eagle-checkout-modal {
+  max-width: 580px;
+}
+
+.eagle-checkout-details {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.2rem;
+  padding: 1.4rem;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 8px;
+  margin-top: 1.4rem;
+}
+
+.eagle-checkout-spec {
+  display: flex;
+  justify-content: space-between;
+  font-size: 1.3rem;
+  font-family: 'jetbrains-mono', monospace;
+}
+
+.eagle-checkout-box {
+  padding: 1.2rem;
+  background: #070B14;
+  border: 1px dashed rgba(255, 255, 255, 0.16);
+  border-radius: 6px;
 }

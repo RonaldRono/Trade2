@@ -4,6 +4,8 @@ import { FOOTER_EXTENSION, FOOTER_LINKS, FOOTER_LOGO, type HeroSectionData } fro
 import ContactModal from './ContactModal'
 import HeroV3 from './HeroV3'
 import { HeadsetIcon, MailIcon, RadioIcon, TerminalIcon } from './Icons'
+import { emitToast } from '../utils/toast'
+import { playEagleSound } from '../utils/sound'
 
 export interface FooterExtensionConfig extends HeroSectionData {
   backgroundImage?: string
@@ -17,13 +19,13 @@ interface FooterProps {
 const CHANNEL_LINKS = [
   {
     label: 'VIP Desk Telegram',
-    href: 'https://t.me/ethanglobalsolutions',
+    href: 'https://t.me/porciussdr',
     external: true,
     icon: <RadioIcon size={16} />,
   },
   {
     label: 'Email the trading desk',
-    href: 'mailto:support@treads-algo.com',
+    href: 'mailto:support@eaglevixsolutions.com',
     external: false,
     icon: <MailIcon size={16} />,
   },
@@ -43,9 +45,25 @@ const CHANNEL_LINKS = [
 
 export default function Footer({ showExtension = true, extension }: FooterProps) {
   const [email, setEmail] = useState('')
+  const [subscribed, setSubscribed] = useState(false)
   const [contactOpen, setContactOpen] = useState(false)
 
   const extensionSection = extension ?? FOOTER_EXTENSION
+
+  const handleNewsletterSubmit = (e: React.FormEvent) => {
+    e.preventDefault()
+    if (!email) return
+
+    playEagleSound('success')
+    setSubscribed(true)
+    emitToast({
+      title: 'Subscribed to VIP Dispatch',
+      message: `${email} is now registered for EAGLE VIX SOLUTIONS algorithm drops.`,
+      type: 'success',
+    })
+    setEmail('')
+    setTimeout(() => setSubscribed(false), 5000)
+  }
 
   return (
     <>
@@ -61,9 +79,9 @@ export default function Footer({ showExtension = true, extension }: FooterProps)
             <div className="footer__top">
               <div className="footer__left">
                 <div className="footer__left-inner">
-                  <Link to="/" title="Treads Algo home">
+                  <Link to="/" title="EAGLE VIX SOLUTIONS home">
                     <img
-                      alt="Treads Algo"
+                      alt="EAGLE VIX SOLUTIONS"
                       src={FOOTER_LOGO}
                       width={320}
                       height={60}
@@ -74,18 +92,15 @@ export default function Footer({ showExtension = true, extension }: FooterProps)
                   </Link>
 
                   <section className="footer__newsletter-container">
-                    <h1 className="footer__newsletter-heading">Keep up with us</h1>
+                    <h2 className="footer__newsletter-heading" style={{ fontSize: '1.4rem' }}>Keep up with EAGLE VIX</h2>
                     <p className="footer__newsletter-description">
-                      Get signal releases, new indicator builds and challenge round announcements.
+                      Get signal releases, new MT5 indicator builds and 100k challenge round announcements.
                     </p>
 
                     <form
                       className="newsletter-form footer__newsletter-component"
                       aria-label="Subscribe to newsletter"
-                      onSubmit={(event) => {
-                        event.preventDefault()
-                        setEmail('')
-                      }}
+                      onSubmit={handleNewsletterSubmit}
                     >
                       <div className="custom-input__field custom-input__field--is-input">
                         <div className="custom-input__label-input-container">
@@ -99,14 +114,23 @@ export default function Footer({ showExtension = true, extension }: FooterProps)
                               aria-invalid="false"
                               value={email}
                               onChange={(event) => setEmail(event.target.value)}
+                              placeholder="trader@quant-desk.com"
                             />
                           </label>
-                          <button type="submit" className="newsletter-form__button">
+                          <button
+                            type="submit"
+                            className="newsletter-form__button"
+                            onClick={() => playEagleSound('click')}
+                          >
                             Sign Up
                           </button>
                         </div>
                       </div>
-                      <p id="footernewsletter-newsletter-form" className="newsletter-form__description" aria-live="polite" />
+                      {subscribed && (
+                        <p className="text-green fs-sm" style={{ marginTop: '0.8rem' }}>
+                          ✓ Subscribed! You will receive VIP Eagle Vix spike drops.
+                        </p>
+                      )}
                     </form>
                   </section>
 
@@ -120,6 +144,7 @@ export default function Footer({ showExtension = true, extension }: FooterProps)
                           ? { target: '_blank', rel: 'noopener noreferrer' }
                           : {})}
                         href={channel.href}
+                        onClick={() => playEagleSound('click')}
                       >
                         {channel.icon}
                       </a>
@@ -130,7 +155,10 @@ export default function Footer({ showExtension = true, extension }: FooterProps)
                     type="button"
                     className="footer__contact-button"
                     aria-label="Open contact form"
-                    onClick={() => setContactOpen(true)}
+                    onClick={() => {
+                      playEagleSound('click')
+                      setContactOpen(true)
+                    }}
                   >
                     Contact Us
                     <span className="icon arrow-button__icon icon--arrow">
@@ -151,6 +179,7 @@ export default function Footer({ showExtension = true, extension }: FooterProps)
                     className="footer__primary-link"
                     title={link.label}
                     to={link.href}
+                    onClick={() => playEagleSound('click')}
                   >
                     <span className="footer__primary-link-label">{link.label}</span>
                   </Link>
@@ -160,22 +189,22 @@ export default function Footer({ showExtension = true, extension }: FooterProps)
 
             <div className="footer__bottom">
               <nav className="footer__secondary-links" aria-label="Legal Site links">
-                <p className="footer__copyright">© Treads Algo &amp; MT5 Systems 2026.</p>
-                <Link className="footer__secondary-link" to="/terms-and-conditions">
+                <p className="footer__copyright">© EAGLE VIX SOLUTIONS &amp; MT5 Systems 2026.</p>
+                <Link className="footer__secondary-link" to="/terms-and-conditions" onClick={() => playEagleSound('click')}>
                   Terms &amp; Conditions
                 </Link>
-                <Link className="footer__secondary-link" to="/privacy-policy">
+                <Link className="footer__secondary-link" to="/privacy-policy" onClick={() => playEagleSound('click')}>
                   Privacy Policy
                 </Link>
-                <Link className="footer__secondary-link" to="/risk-disclosure">
+                <Link className="footer__secondary-link" to="/risk-disclosure" onClick={() => playEagleSound('click')}>
                   Risk Disclosure
                 </Link>
               </nav>
 
               <p className="footer__risk">
-                <strong>Risk Disclosure:</strong> Trading Boom &amp; Crash, synthetic indices and
-                foreign exchange on margin carries high risk and may not be suitable for all
-                investors. Treads Algo provides quantitative software tools, algorithmic signals
+                <strong>Risk Disclosure:</strong> Trading Boom &amp; Crash, synthetic indices, and
+                volatility contracts on margin carries high risk and may not be suitable for all
+                investors. EAGLE VIX SOLUTIONS provides quantitative software tools, algorithmic signals
                 and educational indicators. Never risk capital you cannot afford to lose.
               </p>
             </div>

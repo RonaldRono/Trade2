@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom'
 import type { CmsSection } from '../../types/cms'
 import type { CalculatorAsset } from '../../types/sections'
 import { CalculatorIcon, ZapIcon } from '../Icons'
+import { playEagleSound } from '../../utils/sound'
+import { emitToast } from '../../utils/toast'
 
 interface CalculatorSectionProps {
   section: CmsSection
@@ -169,10 +171,40 @@ export default function CalculatorSection({ section }: CalculatorSectionProps) {
                   </div>
                 </div>
 
-                <Link className="button button--block" to="/terminal">
-                  <CalculatorIcon size={16} />
-                  <span style={{ marginLeft: '0.8rem' }}>Test this setup on the live terminal</span>
-                </Link>
+                <div className="cluster" style={{ flexDirection: 'column', gap: '0.8rem' }}>
+                  <Link
+                    className="button button--block"
+                    to="/terminal"
+                    onClick={() => playEagleSound('click')}
+                  >
+                    <CalculatorIcon size={16} />
+                    <span style={{ marginLeft: '0.8rem' }}>Test this setup on the live terminal</span>
+                  </Link>
+
+                  <button
+                    type="button"
+                    className="button button--ghost button--block"
+                    onClick={() => {
+                      playEagleSound('success')
+                      const copyText = `EAGLE VIX SOLUTIONS — SPIKE RISK CONFIG
+Asset: ${asset.name}
+Lot Size: ${lotSize.toFixed(2)} Lots
+Spike Target: +${pointsCaptured} Points (Est. Return: +$${grossProfit.toFixed(2)} USD)
+Stop Loss: -${stopLossTicks} Ticks (Max Risk: -$${estimatedRisk.toFixed(2)} USD)
+Risk to Reward: 1 : ${riskReward}
+Margin Requirement: $${marginEstimated.toFixed(2)} USD`
+
+                      navigator.clipboard?.writeText(copyText)
+                      emitToast({
+                        title: 'Strategy Setup Copied',
+                        message: `${asset.name} risk-reward configuration copied to clipboard.`,
+                        type: 'success',
+                      })
+                    }}
+                  >
+                    📋 Copy Strategy Parameters
+                  </button>
+                </div>
               </div>
             </div>
 

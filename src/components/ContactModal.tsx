@@ -1,4 +1,6 @@
 import { useEffect, useState } from 'react'
+import { emitToast } from '../utils/toast'
+import { playEagleSound } from '../utils/sound'
 
 interface ContactModalProps {
   isOpen: boolean
@@ -10,7 +12,7 @@ const SUBJECTS = [
   '100k Challenge Bridge Assistance',
   'License Key HWID Reset',
   'Custom EA or Algorithm Request',
-  'Crypto Payment Verification',
+  'Crypto / Deriv Payment Verification',
 ]
 
 export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
@@ -46,6 +48,17 @@ export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
     setSent(false)
   }
 
+  const handleSubmit = (event: React.FormEvent) => {
+    event.preventDefault()
+    setSent(true)
+    playEagleSound('success')
+    emitToast({
+      title: 'Dispatch Submitted',
+      message: `Priority ticket created for ${name}. Escalated to EAGLE VIX Senior Trading Engineer.`,
+      type: 'success',
+    })
+  }
+
   return (
     <div
       className="modal-backdrop"
@@ -54,21 +67,32 @@ export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
         if (event.target === event.currentTarget) onClose()
       }}
     >
-      <div className="modal" role="dialog" aria-modal="true" aria-label="Contact the VIP trading desk">
-        <button type="button" className="modal__close" aria-label="Close contact form" onClick={onClose}>
+      <div className="modal" role="dialog" aria-modal="true" aria-label="Contact EAGLE VIX VIP trading desk">
+        <button
+          type="button"
+          className="modal__close"
+          aria-label="Close contact form"
+          onClick={() => {
+            playEagleSound('click')
+            onClose()
+          }}
+        >
           ✕
         </button>
 
-        <span className="eyebrow">24/7 Dedicated VIP Trading Support</span>
+        <span className="eyebrow eyebrow--amber">
+          <span className="eyebrow__dot" />
+          EAGLE VIX SOLUTIONS · 24/7 Dedicated VIP Trading Support
+        </span>
         <h2 className="modal__title">Send a priority support dispatch</h2>
         <p className="modal__text">
-          Tell us what you need. A senior trading systems engineer will pick it up, and the average
-          response time on the desk is under 15 minutes.
+          Tell us what you need. A senior EAGLE VIX quantitative systems engineer will pick it up,
+          and the average response time on the desk is under 15 minutes.
         </p>
 
         {sent ? (
           <div className="support-form__success" style={{ marginTop: '2.4rem' }}>
-            <h4>Message dispatched!</h4>
+            <h4>Message dispatched to EAGLE VIX Desk!</h4>
             <p>
               Thank you, {name}. Your inquiry has been routed to our senior trading systems
               engineer. Average response time is under 15 minutes.
@@ -78,13 +102,21 @@ export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
                 type="button"
                 className="button button--ghost"
                 onClick={() => {
+                  playEagleSound('click')
                   reset()
                   onClose()
                 }}
               >
                 Close
               </button>
-              <button type="button" className="button" onClick={reset}>
+              <button
+                type="button"
+                className="button"
+                onClick={() => {
+                  playEagleSound('click')
+                  reset()
+                }}
+              >
                 Send Another Message
               </button>
             </div>
@@ -93,10 +125,7 @@ export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
           <form
             className="support-form"
             style={{ marginTop: '2.4rem' }}
-            onSubmit={(event) => {
-              event.preventDefault()
-              setSent(true)
-            }}
+            onSubmit={handleSubmit}
           >
             <div className="support-form__row">
               <div className="custom-input__field custom-input__field--is-input">
@@ -157,10 +186,21 @@ export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
             </div>
 
             <div className="modal__actions">
-              <button type="submit" className="button">
-                Submit to 24/7 Desk
+              <button
+                type="submit"
+                className="button"
+                onClick={() => playEagleSound('click')}
+              >
+                Submit to EAGLE VIX Desk
               </button>
-              <button type="button" className="button button--ghost" onClick={onClose}>
+              <button
+                type="button"
+                className="button button--ghost"
+                onClick={() => {
+                  playEagleSound('click')
+                  onClose()
+                }}
+              >
                 Cancel
               </button>
             </div>

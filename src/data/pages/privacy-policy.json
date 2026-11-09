@@ -1,7 +1,7 @@
-{
+﻿{
     "slug":  "privacy-policy",
-    "title":  "Privacy Policy | Treads Algo",
-    "description":  "How Treads Algo collects, uses, stores and protects the information you share with us, including MT5 credentials used for the copy-trading bridge.",
+    "title":  "Privacy Policy | EAGLE VIX SOLUTIONS",
+    "description":  "How EAGLE VIX SOLUTIONS collects, uses, stores and protects the information you share with us, including MT5 credentials used for the copy-trading bridge.",
     "heroImage":  "/images/crypto-settlement.jpg",
     "heroImageAlt":  "Cryptocurrency settlement over blockchain",
     "isExtendedFooterEnabled":  false,
@@ -22,7 +22,7 @@
                                                                        "content":  [
                                                                                        {
                                                                                            "nodeType":  "text",
-                                                                                           "value":  "This policy explains what information Treads Algo collects when you browse this site, buy a licence, join the VIP signals channel or connect an MT5 account to the copy-trading bridge, and how that information is handled."
+                                                                                           "value":  "This policy explains what information EAGLE VIX SOLUTIONS collects when you browse this site, buy a licence, join the VIP signals channel or connect an MT5 account to the copy-trading bridge, and how that information is handled."
                                                                                        }
                                                                                    ]
                                                                    },
@@ -182,7 +182,7 @@
                                                                        "content":  [
                                                                                        {
                                                                                            "nodeType":  "text",
-                                                                                           "value":  "You may request a copy of the personal data we hold about you, ask us to correct it, or ask us to erase it where we are not required to retain it. Write to support@treads-algo.com and we will respond within 30 days."
+                                                                                           "value":  "You may request a copy of the personal data we hold about you, ask us to correct it, or ask us to erase it where we are not required to retain it. Write to support@eaglevixsolutions.com and we will respond within 30 days."
                                                                                        }
                                                                                    ]
                                                                    },
@@ -218,7 +218,7 @@
                                                                        "content":  [
                                                                                        {
                                                                                            "nodeType":  "text",
-                                                                                           "value":  "Data in transit is encrypted with TLS. Licence activation uses hardware-bound keys to prevent unauthorised use. For any privacy question, contact support@treads-algo.com."
+                                                                                           "value":  "Data in transit is encrypted with TLS. Licence activation uses hardware-bound keys to prevent unauthorised use. For any privacy question, contact support@eaglevixsolutions.com."
                                                                                        }
                                                                                    ]
                                                                    }
@@ -228,3 +228,4 @@
                      }
                  ]
 }
+

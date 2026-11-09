@@ -3,6 +3,8 @@ import { Outlet, useLocation } from 'react-router-dom'
 import Navigation from '../components/Navigation'
 import Footer from '../components/Footer'
 import MarketTicker from '../components/MarketTicker'
+import ToastContainer from '../components/ToastContainer'
+import LiveDeskAssistant from '../components/LiveDeskAssistant'
 import { FOOTER_EXTENSION } from '../data/content'
 import { getPageData } from '../data/pageRegistry'
 import { resolveCtaHref } from '../utils/cta'
@@ -24,7 +26,7 @@ function getFooterExtension(page?: PageData): FooterExtensionConfig | null {
     heading: page.extendedFooterHeading,
     text: page.extendedFooterText ?? '',
     image: page.extendedFooterImage?.src ?? '/images/global-desk.jpg',
-    imageAlt: page.extendedFooterImage?.description ?? 'Treads Algo trading desk',
+    imageAlt: page.extendedFooterImage?.description ?? 'EAGLE VIX SOLUTIONS trading desk',
     cta: {
       label: cta?.label ?? 'Contact VIP Desk',
       href,
@@ -44,20 +46,23 @@ export default function PageLayout() {
   const showExtension = isHome || Boolean(page?.isExtendedFooterEnabled)
 
   useEffect(() => {
-    const title = isHome ? 'Treads Algo' : (page?.title ?? 'Treads Algo')
-    document.title = title.includes('Treads Algo') ? title : `${title} | Treads Algo`
+    const defaultBrand = 'EAGLE VIX SOLUTIONS'
+    const title = isHome ? defaultBrand : (page?.title ?? defaultBrand)
+    document.title = title.includes('EAGLE VIX SOLUTIONS') ? title : `${title.replace(/Treads Algo/g, 'EAGLE VIX SOLUTIONS')} | EAGLE VIX SOLUTIONS`
     if (page?.description) {
-      document.querySelector('meta[name="description"]')?.setAttribute('content', page.description)
+      document.querySelector('meta[name="description"]')?.setAttribute('content', page.description.replace(/Treads Algo/g, 'EAGLE VIX SOLUTIONS'))
     }
     window.scrollTo(0, 0)
   }, [location.pathname, isHome, page?.title, page?.description])
 
   return (
     <>
+      <ToastContainer />
       <MarketTicker />
       <Navigation />
       <Outlet />
       <Footer extension={extension} showExtension={showExtension} />
+      <LiveDeskAssistant />
     </>
   )
 }

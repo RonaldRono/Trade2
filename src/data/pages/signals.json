@@ -1,6 +1,6 @@
 ﻿{
     "slug":  "signals",
-    "title":  "VIP Real-Time Trading Signals | Treads Algo",
+    "title":  "VIP Real-Time Trading Signals | EAGLE VIX SOLUTIONS",
     "description":  "Real-time entry coordinates for Boom, Crash and synthetic indices beamed straight to a private Telegram channel. 15 to 30 verified spike signals daily with precise entry, stop loss and multi-target take profits.",
     "heroImage":  "/images/mobile-trading.jpg",
     "heroImageAlt":  "Live mobile trading execution receiving signals",
@@ -177,3 +177,4 @@
                      }
                  ]
 }
+

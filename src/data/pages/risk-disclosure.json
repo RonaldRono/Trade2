@@ -1,7 +1,7 @@
-{
+﻿{
     "slug":  "risk-disclosure",
-    "title":  "Risk Disclosure | Treads Algo",
-    "description":  "Full risk disclosure for trading Boom and Crash, synthetic indices and foreign exchange on margin using Treads Algo software, signals and educational indicators.",
+    "title":  "Risk Disclosure | EAGLE VIX SOLUTIONS",
+    "description":  "Full risk disclosure for trading Boom and Crash, synthetic indices and foreign exchange on margin using EAGLE VIX SOLUTIONS software, signals and educational indicators.",
     "heroImage":  "/images/market-chart.jpg",
     "heroImageAlt":  "Market price chart used to illustrate trading risk",
     "isExtendedFooterEnabled":  false,
@@ -22,7 +22,7 @@
                                                                        "content":  [
                                                                                        {
                                                                                            "nodeType":  "text",
-                                                                                           "value":  "Trading boom and crash indices, synthetic indices and foreign exchange on margin carries a high level of risk and may not be suitable for all investors. High volatility can work both to your advantage and to your disadvantage. Before you use any Treads Algo software, signal feed or copy-trading service you should carefully consider your investment objectives and level of experience."
+                                                                                           "value":  "Trading boom and crash indices, synthetic indices and foreign exchange on margin carries a high level of risk and may not be suitable for all investors. High volatility can work both to your advantage and to your disadvantage. Before you use any EAGLE VIX SOLUTIONS software, signal feed or copy-trading service you should carefully consider your investment objectives and level of experience."
                                                                                        }
                                                                                    ]
                                                                    },
@@ -40,7 +40,7 @@
                                                                        "content":  [
                                                                                        {
                                                                                            "nodeType":  "text",
-                                                                                           "value":  "Treads Algo provides quantitative software tools, algorithmic signals and educational indicators. We do not manage money, we do not accept deposits, and we do not guarantee profits. Nothing we publish is investment advice."
+                                                                                           "value":  "EAGLE VIX SOLUTIONS provides quantitative software tools, algorithmic signals and educational indicators. We do not manage money, we do not accept deposits, and we do not guarantee profits. Nothing we publish is investment advice."
                                                                                        }
                                                                                    ]
                                                                    },
@@ -229,7 +229,7 @@
                                                                        "content":  [
                                                                                        {
                                                                                            "nodeType":  "text",
-                                                                                           "value":  "To the fullest extent permitted by law, Treads Algo and its personnel are not liable for trading losses, lost profits, data loss, service interruption or broker-side execution failures arising from the use of our software, signals or copy-trading services. Total liability is limited to the amount you paid us in the twelve months preceding the claim."
+                                                                                           "value":  "To the fullest extent permitted by law, EAGLE VIX SOLUTIONS and its personnel are not liable for trading losses, lost profits, data loss, service interruption or broker-side execution failures arising from the use of our software, signals or copy-trading services. Total liability is limited to the amount you paid us in the twelve months preceding the claim."
                                                                                        }
                                                                                    ]
                                                                    }
@@ -239,3 +239,4 @@
                      }
                  ]
 }
+

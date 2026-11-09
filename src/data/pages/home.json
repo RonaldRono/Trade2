@@ -1,10 +1,10 @@
-{
+﻿{
   "slug": "home",
-  "title": "Treads Algo — MT5 Precision Spike Systems",
-  "description": "Treads Algo delivers non-repainting MT5 spike detectors, VIP real-time signals and automated copy trading for Boom, Crash and synthetic indices on Deriv and Weltrade.",
+  "title": "EAGLE VIX SOLUTIONS — MT5 Precision Spike Systems",
+  "description": "EAGLE VIX SOLUTIONS delivers non-repainting MT5 spike detectors, VIP real-time signals and automated copy trading for Boom, Crash and synthetic indices on Deriv and Weltrade.",
   "isExtendedFooterEnabled": true,
   "extendedFooterHeading": "The trading desk behind every spike",
-  "extendedFooterText": "Treads Algo pairs quantitative research engineers with low-latency VPS infrastructure across Deriv and Weltrade — and answers on the VIP desk in under 15 minutes.",
+  "extendedFooterText": "EAGLE VIX SOLUTIONS pairs quantitative research engineers with low-latency VPS infrastructure across Deriv and Weltrade — and answers on the VIP desk in under 15 minutes.",
   "extendedFooterImage": {
     "src": "/images/global-desk.jpg",
     "width": 2880,
@@ -166,7 +166,7 @@
       "id": "synthetics",
       "eyebrow": "Built for synthetics",
       "title": "Calibrated for how Deriv and Weltrade actually move",
-      "text": "Most retail tools are tuned for major FX pairs and fall apart on synthetic indices. Every Treads Algo model is fitted against Deriv and Weltrade order flow, with per-broker presets shipped inside the package.",
+      "text": "Most retail tools are tuned for major FX pairs and fall apart on synthetic indices. Every EAGLE VIX SOLUTIONS model is fitted against Deriv and Weltrade order flow, with per-broker presets shipped inside the package.",
       "image": "/images/quant-workflow.jpg",
       "imageAlt": "Quantitative research workflow on a trading workstation",
       "bullets": [
@@ -180,7 +180,7 @@
     {
       "__typename": "ValuesModule",
       "id": "value-pillars",
-      "eyebrow": "Why traders choose Treads Algo",
+      "eyebrow": "Why traders choose EAGLE VIX SOLUTIONS",
       "heading": "Speed, certainty and a frictionless experience",
       "text": "Four commitments that define every release we ship to the desk.",
       "values": [
@@ -304,3 +304,4 @@
     }
   ]
 }
+

@@ -2,6 +2,7 @@ import { useState } from 'react'
 import type { CmsSection } from '../../types/cms'
 import type { FaqItem } from '../../types/sections'
 import SectionHeader from './SectionHeader'
+import { playEagleSound } from '../../utils/sound'
 
 interface FaqAccordionSectionProps {
   section: CmsSection
@@ -31,7 +32,10 @@ export default function FaqAccordionSection({ section }: FaqAccordionSectionProp
                   type="button"
                   className="faq__question"
                   aria-expanded={isOpen}
-                  onClick={() => setOpenIndex(isOpen ? null : index)}
+                  onClick={() => {
+                    playEagleSound('click')
+                    setOpenIndex(isOpen ? null : index)
+                  }}
                 >
                   <span>{item.question}</span>
                   <span className="faq__icon" aria-hidden="true">

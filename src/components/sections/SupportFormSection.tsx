@@ -274,8 +274,14 @@ export default function SupportFormSection({ section }: SupportFormSectionProps)
                   <button type="submit" className="button">
                     {isChallenge ? 'Secure Your Spot — $85.00 USD' : 'Submit to 24/7 Desk'}
                   </button>
-                  <button type="button" className="button button--ghost">
-                    Live chat with the desk
+                  <button
+                    type="button"
+                    className="button button--ghost"
+                    onClick={() => {
+                      window.dispatchEvent(new CustomEvent('open-eagle-chat'))
+                    }}
+                  >
+                    🦅 Live chat with the desk
                   </button>
                 </div>
               </form>
@@ -292,13 +298,13 @@ export default function SupportFormSection({ section }: SupportFormSectionProps)
               />
               <span className="media-figure__overlay" />
               <div className="media-figure__caption">
-                <span className="media-figure__tag">Global desk active</span>
+                <span className="media-figure__tag">EAGLE VIX Active</span>
                 <span className="media-figure__title">Average response time: under 15 minutes</span>
               </div>
             </div>
 
             <div className="stack stack--sm">
-              <a className="channel-card" href="https://t.me/ethanglobalsolutions" target="_blank" rel="noopener noreferrer">
+              <a className="channel-card" href="https://t.me/porciussdr" target="_blank" rel="noopener noreferrer">
                 <span className="channel-card__icon">
                   <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" aria-hidden="true">
                     <path d="m21 4-3 16-6-4.5L9 19l.5-4.5L4 12l17-8Z" />
@@ -307,11 +313,22 @@ export default function SupportFormSection({ section }: SupportFormSectionProps)
                 </span>
                 <span>
                   <span className="channel-card__label">Direct Telegram</span>
-                  <span className="channel-card__value">@ethanglobalsolutions</span>
+                  <span className="channel-card__value">@porciussdr</span>
+                </span>
+              </a>
+              <a className="channel-card" href="tel:+254799800460">
+                <span className="channel-card__icon">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" aria-hidden="true">
+                    <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
+                  </svg>
+                </span>
+                <span>
+                  <span className="channel-card__label">Call Us</span>
+                  <span className="channel-card__value">0799800460</span>
                 </span>
               </a>
 
-              <a className="channel-card" href="mailto:support@treads-algo.com">
+              <a className="channel-card" href="mailto:support@eaglevixsolutions.com">
                 <span className="channel-card__icon">
                   <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" aria-hidden="true">
                     <rect x="2.5" y="4.5" width="19" height="15" rx="2.5" />
@@ -320,7 +337,7 @@ export default function SupportFormSection({ section }: SupportFormSectionProps)
                 </span>
                 <span>
                   <span className="channel-card__label">VIP desk email</span>
-                  <span className="channel-card__value">support@treads-algo.com</span>
+                  <span className="channel-card__value">support@eaglevixsolutions.com</span>
                 </span>
               </a>
 
@@ -354,3 +371,6 @@ export default function SupportFormSection({ section }: SupportFormSectionProps)
     </section>
   )
 }
+
+
+

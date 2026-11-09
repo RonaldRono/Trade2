@@ -22,10 +22,24 @@ export default function MarketTicker() {
   const loop = [...items, ...items]
 
   return (
-    <div className="ticker" aria-label="Live synthetic index prices">
+    <div className="ticker" aria-label="EAGLE VIX SOLUTIONS Live synthetic index prices">
       <div className="ticker__track">
         {loop.map((item, index) => (
           <span className="ticker__item" key={`${item.symbol}-${index}`}>
+            {index % 4 === 0 && (
+              <span
+                style={{
+                  color: '#00F0FF',
+                  fontWeight: 'bold',
+                  marginRight: '0.8rem',
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  gap: '0.4rem',
+                }}
+              >
+                <span>🦅 EVIX</span>
+              </span>
+            )}
             <span className="ticker__symbol">{item.symbol}</span>
             <span className="ticker__price">
               {item.price.toLocaleString(undefined, {

@@ -1,6 +1,23 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 60" fill="none" role="img" aria-label="Treads Algo">
-  <rect x="1" y="9" width="42" height="42" rx="9" fill="#22D3EE" />
-  <path d="M25.6 17.5 15.8 32.2h6.6l-2.2 10.3 9.8-14.7h-6.6l2.2-10.3Z" fill="#07090C" />
-  <text x="58" y="30" font-family="pp-neue-machina-plain, Helvetica Neue, Arial, sans-serif" font-size="21" fill="#E9EEF6">TREADS</text>
-  <text x="58" y="46" font-family="jetbrains-mono, monospace" font-size="10" letter-spacing="2.6" fill="#22D3EE">ALGO PRO · MT5</text>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 60" fill="none" role="img" aria-label="EAGLE VIX SOLUTIONS">
+  <defs>
+    <linearGradient id="wmGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#00F0FF" />
+      <stop offset="100%" stop-color="#F59E0B" />
+    </linearGradient>
+    <linearGradient id="goldGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FCD34D" />
+      <stop offset="100%" stop-color="#F59E0B" />
+    </linearGradient>
+  </defs>
+  <!-- Eagle Crest Icon -->
+  <g transform="translate(6, 6)">
+    <rect width="48" height="48" rx="12" fill="#0A0F1D" stroke="#1E293B" stroke-width="1.5" />
+    <path d="M8 20 C14 13 22 11 28 14 C21 18 15 23 12 30 Z" fill="#00F0FF" opacity="0.85" />
+    <path d="M40 20 C34 13 26 11 20 14 C27 18 33 23 36 30 Z" fill="url(#goldGradient)" opacity="0.85" />
+    <path d="M24 8 L28 19 L34 19 L26 27 L29 38 L24 32 L19 38 L22 27 L14 19 L20 19 Z" fill="#00F0FF" />
+    <path d="M26 18 L19 30 H25 L22 42 L32 27 H26 L29 18 Z" fill="#F59E0B" />
+  </g>
+  <!-- Text -->
+  <text x="68" y="27" font-family="'PP Neue Machina', 'Neue Haas Grotesk', system-ui, sans-serif" font-weight="800" font-size="20" letter-spacing="1.5" fill="#FFFFFF">EAGLE <tspan fill="#00F0FF">VIX</tspan></text>
+  <text x="68" y="44" font-family="'JetBrains Mono', monospace" font-size="10.5" font-weight="700" letter-spacing="3.2" fill="#F59E0B">SOLUTIONS <tspan fill="#64748B">· QUANT MT5</tspan></text>
 </svg>

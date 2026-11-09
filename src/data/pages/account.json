@@ -1,6 +1,6 @@
 ﻿{
     "slug":  "account",
-    "title":  "My Account \u0026 License Manager | Treads Algo",
+    "title":  "My Account \u0026 License Manager | EAGLE VIX SOLUTIONS",
     "description":  "Manage your hardware-bound MT5 indicator licenses, reset device bindings for VPS migration, and monitor real-time copy trade telemetry.",
     "heroImage":  "/images/vps-nodes.jpg",
     "heroImageAlt":  "Hardware node protection and VPS infrastructure",
@@ -110,3 +110,4 @@
                      }
                  ]
 }
+

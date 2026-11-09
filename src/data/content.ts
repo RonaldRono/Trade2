@@ -71,7 +71,7 @@ export const HERO_SECTIONS: HeroSectionData[] = [
     layout: 'text aligned to left / cta aligned to right',
     hasGradient: true,
     heading: 'Precision spike detection for Boom & Crash',
-    text: 'Treads Algo builds non-repainting MT5 indicators, real-time sniper signals and automated copy trading for Deriv and Weltrade synthetics — delivered the second your payment confirms.',
+    text: 'EAGLE VIX SOLUTIONS builds non-repainting MT5 indicators, real-time sniper signals and automated copy trading for Deriv and Weltrade synthetics — delivered the second your payment confirms.',
     image: '/images/hero-terminal.jpg',
     imageAlt: 'Algorithmic trading charts running on a MetaTrader 5 terminal',
     meta: [
@@ -111,7 +111,7 @@ export const FOOTER_EXTENSION: HeroSectionData = {
   anchorId: 'footerextension',
   layout: 'text aligned to left / cta aligned to left',
   heading: 'The trading desk behind every spike',
-  text: 'Treads Algo pairs quantitative research engineers with low-latency VPS infrastructure across Deriv and Weltrade — and answers on the VIP desk in under 15 minutes.',
+  text: 'EAGLE VIX SOLUTIONS pairs quantitative research engineers with low-latency VPS infrastructure across Deriv and Weltrade — and answers on the VIP desk in under 15 minutes.',
   image: '/images/global-desk.jpg',
   imageAlt: 'Global trading support desk',
   cta: { label: 'Contact VIP Desk', href: '/contact' },

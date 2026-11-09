@@ -1,7 +1,7 @@
-{
+﻿{
     "slug":  "terms-and-conditions",
-    "title":  "Terms \u0026 Conditions | Treads Algo",
-    "description":  "The terms that govern your use of Treads Algo software, signals, the MT5 marketplace and copy-trading challenge.",
+    "title":  "Terms \u0026 Conditions | EAGLE VIX SOLUTIONS",
+    "description":  "The terms that govern your use of EAGLE VIX SOLUTIONS software, signals, the MT5 marketplace and copy-trading challenge.",
     "heroImage":  "/images/institutional-desk.jpg",
     "heroImageAlt":  "Institutional trading desk",
     "isExtendedFooterEnabled":  false,
@@ -22,7 +22,7 @@
                                                                        "content":  [
                                                                                        {
                                                                                            "nodeType":  "text",
-                                                                                           "value":  "These terms govern access to the Treads Algo website, the MT5 indicator marketplace, the VIP signals channel and the copy-trading challenge. By creating an order, opening a channel membership or connecting an MT5 account to the bridge, you accept these terms in full."
+                                                                                           "value":  "These terms govern access to the EAGLE VIX SOLUTIONS website, the MT5 indicator marketplace, the VIP signals channel and the copy-trading challenge. By creating an order, opening a channel membership or connecting an MT5 account to the bridge, you accept these terms in full."
                                                                                        }
                                                                                    ]
                                                                    },
@@ -40,7 +40,7 @@
                                                                        "content":  [
                                                                                        {
                                                                                            "nodeType":  "text",
-                                                                                           "value":  "\"Software\" means any compiled MetaTrader 5 indicator, expert advisor, preset file or utility supplied by Treads Algo. \"Signals\" means entries delivered through the private Telegram channel or the web terminal. \"The Bridge\" means the high-frequency copy-trading execution node that connects a client MT5 account to our execution cluster."
+                                                                                           "value":  "\"Software\" means any compiled MetaTrader 5 indicator, expert advisor, preset file or utility supplied by EAGLE VIX SOLUTIONS. \"Signals\" means entries delivered through the private Telegram channel or the web terminal. \"The Bridge\" means the high-frequency copy-trading execution node that connects a client MT5 account to our execution cluster."
                                                                                        }
                                                                                    ]
                                                                    },
@@ -232,3 +232,4 @@
                      }
                  ]
 }
+

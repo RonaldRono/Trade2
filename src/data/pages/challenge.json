@@ -1,6 +1,6 @@
 ﻿{
     "slug":  "challenge",
-    "title":  "$100 to $100k Trading Challenge | Treads Algo",
+    "title":  "$100 to $100k Trading Challenge | EAGLE VIX SOLUTIONS",
     "description":  "Grow from 100 USD to 100,000 USD in 3 days. Our automated quantitative trading engine trades your MT5 account synchronously via high-frequency copy trading on Deriv and Weltrade.",
     "heroImage":  "/images/challenge-room.jpg",
     "heroImageAlt":  "Institutional prop trading capital desk",
@@ -172,3 +172,4 @@
                      }
                  ]
 }
+

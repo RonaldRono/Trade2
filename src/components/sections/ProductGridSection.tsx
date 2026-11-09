@@ -4,6 +4,8 @@ import type { CmsSection } from '../../types/cms'
 import type { ProductItem } from '../../types/sections'
 import SectionHeader from './SectionHeader'
 import { SearchIcon } from '../Icons'
+import CheckoutModal from '../CheckoutModal'
+import { playEagleSound } from '../../utils/sound'
 
 interface ProductGridSectionProps {
   section: CmsSection
@@ -37,6 +39,7 @@ export default function ProductGridSection({ section }: ProductGridSectionProps)
   const products = useMemo(() => payload.products ?? [], [payload.products])
   const [category, setCategory] = useState('All Tools')
   const [query, setQuery] = useState('')
+  const [selectedProduct, setSelectedProduct] = useState<ProductItem | null>(null)
 
   const categories = useMemo(() => {
     const found = products.map((product) => product.category)
@@ -71,7 +74,10 @@ export default function ProductGridSection({ section }: ProductGridSectionProps)
                   key={item}
                   type="button"
                   className={`chip${category === item ? ' is-active' : ''}`}
-                  onClick={() => setCategory(item)}
+                  onClick={() => {
+                    playEagleSound('click')
+                    setCategory(item)
+                  }}
                 >
                   {item}
                 </button>
@@ -84,7 +90,7 @@ export default function ProductGridSection({ section }: ProductGridSectionProps)
                 type="text"
                 value={query}
                 onChange={(event) => setQuery(event.target.value)}
-                placeholder="Search indicators..."
+                placeholder="Search indicators & systems..."
                 aria-label="Search indicators"
               />
             </div>
@@ -93,7 +99,7 @@ export default function ProductGridSection({ section }: ProductGridSectionProps)
 
         <div className="grid grid--3">
           {visible.map((product) => (
-            <article key={product.id} className="product-card">
+            <article key={product.id} className="product-card eagle-card-glow">
               <div className="product-card__media">
                 <img src={product.image} alt={product.name} loading="lazy" decoding="async" />
                 <span className={`product-card__badge ${BADGE_TONE[product.badgeTone ?? 'accent'] ?? ''}`}>
@@ -128,9 +134,28 @@ export default function ProductGridSection({ section }: ProductGridSectionProps)
                   <div className="product-card__price-label">One-time licence</div>
                   <div className="product-card__price">${product.price.toFixed(2)}</div>
                 </div>
-                <Link className="button" to={`/terminal?tool=${product.id}`}>
-                  Get Access
-                </Link>
+                <div style={{ display: 'flex', gap: '0.6rem' }}>
+                  <Link
+                    className="button button--ghost"
+                    style={{ padding: '0.6rem 1rem', fontSize: '1.2rem' }}
+                    to={`/terminal?tool=${product.id}`}
+                    onClick={() => playEagleSound('click')}
+                    title="Live Test Demo"
+                  >
+                    Demo
+                  </Link>
+                  <button
+                    type="button"
+                    className="button"
+                    style={{ padding: '0.6rem 1.4rem' }}
+                    onClick={() => {
+                      playEagleSound('click')
+                      setSelectedProduct(product)
+                    }}
+                  >
+                    Get Access
+                  </button>
+                </div>
               </div>
             </article>
           ))}
@@ -148,6 +173,12 @@ export default function ProductGridSection({ section }: ProductGridSectionProps)
           </p>
         )}
       </div>
+
+      <CheckoutModal
+        product={selectedProduct}
+        isOpen={Boolean(selectedProduct)}
+        onClose={() => setSelectedProduct(null)}
+      />
     </section>
   )
 }

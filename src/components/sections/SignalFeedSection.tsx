@@ -3,6 +3,8 @@ import type { CmsSection } from '../../types/cms'
 import type { SignalItem } from '../../types/sections'
 import { resolveCta } from '../../utils/cta'
 import Action from '../Action'
+import { emitToast } from '../../utils/toast'
+import { playEagleSound } from '../../utils/sound'
 
 interface SignalFeedSectionProps {
   section: CmsSection
@@ -32,8 +34,9 @@ export default function SignalFeedSection({ section }: SignalFeedSectionProps) {
   const visible = signals.filter((signal) => broker === 'all' || signal.broker === broker)
 
   const handleCopy = async (signal: SignalItem) => {
+    playEagleSound('order')
     const text = [
-      'TREADS ALGO VIP SIGNAL',
+      'EAGLE VIX SOLUTIONS VIP SIGNAL',
       `Asset: ${signal.asset} (${signal.broker})`,
       `Action: ${signal.type}`,
       `Entry: ${signal.entry}`,
@@ -46,10 +49,15 @@ export default function SignalFeedSection({ section }: SignalFeedSectionProps) {
     try {
       await navigator.clipboard.writeText(text)
     } catch {
-      // Clipboard access can be denied; the UI still confirms the tap.
+      // Clipboard access fallback
     }
 
     setCopiedId(signal.id)
+    emitToast({
+      title: 'Order Copied to Clipboard',
+      message: `${signal.asset} ${signal.type} entry @ ${signal.entry} ready for MT5.`,
+      type: 'success',
+    })
     setTimeout(() => setCopiedId(null), 2500)
   }
 

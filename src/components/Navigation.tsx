@@ -3,6 +3,8 @@ import { Link, useLocation } from 'react-router-dom'
 import { NAV_LINKS } from '../data/content'
 import { useNavigationScroll } from '../hooks/useNavigationScroll'
 import { playEagleSound } from '../utils/sound'
+import { handleTelegramClick, TELEGRAM_URL } from '../utils/telegram'
+import { PhoneIcon, TelegramIcon, WhatsAppIcon } from './Icons'
 
 function EagleLogo() {
   return (
@@ -93,7 +95,63 @@ export default function Navigation() {
             </div>
           </nav>
 
-          <div className="navigation__actions" style={{ display: 'flex', alignItems: 'center', gap: '0.8rem' }}>
+          <div
+            className="navigation__actions"
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              gap: '0.8rem',
+              pointerEvents: 'all',
+              position: 'relative',
+              zIndex: 1000,
+            }}
+          >
+            <a
+              href={TELEGRAM_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="button button--ghost nav-contact-btn nav-contact-btn--tg"
+              style={{
+                fontSize: '1.1rem',
+                padding: '0.5rem 0.9rem',
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '0.5rem',
+                borderRadius: '6px',
+                borderColor: 'rgba(34, 211, 238, 0.4)',
+                color: '#22D3EE',
+                cursor: 'pointer',
+                pointerEvents: 'all',
+              }}
+              title="Open Telegram @porciussdr"
+              onClick={handleTelegramClick}
+            >
+              <TelegramIcon size={14} />
+              <span className="fs-mono nav-contact-btn__label">@porciussdr</span>
+            </a>
+
+            <a
+              href="tel:+254799278511"
+              className="button button--ghost nav-contact-btn nav-contact-btn--phone"
+              style={{
+                fontSize: '1.1rem',
+                padding: '0.5rem 0.9rem',
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '0.5rem',
+                borderRadius: '6px',
+                borderColor: 'rgba(251, 191, 36, 0.4)',
+                color: '#FBBF24',
+                cursor: 'pointer',
+                pointerEvents: 'all',
+              }}
+              title="Call VIP Hotline +254 799 278 511"
+              onClick={() => playEagleSound('click')}
+            >
+              <PhoneIcon size={14} />
+              <span className="fs-mono nav-contact-btn__label">+254 799 278 511</span>
+            </a>
+
             <button
               type="button"
               className="button button--ghost"
@@ -153,10 +211,49 @@ export default function Navigation() {
               )}
             </Link>
           ))}
-          <div style={{ padding: '1.2rem', marginTop: '1rem' }}>
+          <div style={{ padding: '1.2rem', marginTop: '1rem', display: 'flex', flexDirection: 'column', gap: '0.8rem' }}>
+            <div className="fs-sm text-dim" style={{ letterSpacing: '0.05em' }}>DIRECT VIP HOTLINES:</div>
+            <a
+              href={TELEGRAM_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="button button--block"
+              style={{ display: 'inline-flex', alignItems: 'center', justifyContent: 'center', gap: '0.6rem', background: '#0284C7', color: '#FFF', cursor: 'pointer' }}
+              onClick={(e) => {
+                handleTelegramClick(e)
+                closeMobileNav()
+              }}
+            >
+              <TelegramIcon size={16} />
+              <span>Telegram: @porciussdr</span>
+            </a>
+
+            <a
+              href="tel:+254799278511"
+              className="button button--ghost button--block"
+              style={{ display: 'inline-flex', alignItems: 'center', justifyContent: 'center', gap: '0.6rem' }}
+              onClick={closeMobileNav}
+            >
+              <PhoneIcon size={16} />
+              <span>Call: +254 799 278 511</span>
+            </a>
+
+            <a
+              href="https://wa.me/254799278511"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="button button--ghost button--block"
+              style={{ display: 'inline-flex', alignItems: 'center', justifyContent: 'center', gap: '0.6rem' }}
+              onClick={closeMobileNav}
+            >
+              <WhatsAppIcon size={16} />
+              <span>WhatsApp: +254 799 278 511</span>
+            </a>
+
             <button
               type="button"
               className="button button--block"
+              style={{ marginTop: '0.4rem' }}
               onClick={() => {
                 closeMobileNav()
                 openLiveDesk()

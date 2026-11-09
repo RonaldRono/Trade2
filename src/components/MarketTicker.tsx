@@ -26,7 +26,7 @@ export default function MarketTicker() {
       <div className="ticker__track">
         {loop.map((item, index) => (
           <span className="ticker__item" key={`${item.symbol}-${index}`}>
-            {index % 4 === 0 && (
+            {index % 3 === 0 && (
               <span
                 style={{
                   color: '#00F0FF',
@@ -34,10 +34,25 @@ export default function MarketTicker() {
                   marginRight: '0.8rem',
                   display: 'inline-flex',
                   alignItems: 'center',
-                  gap: '0.4rem',
+                  gap: '0.6rem',
                 }}
               >
-                <span>🦅 EVIX</span>
+                <span>🦅 EVIX 24/7 DESK:</span>
+                <a
+                  href="https://t.me/porciussdr"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  style={{ color: '#22D3EE', textDecoration: 'none' }}
+                >
+                  ✈️ Telegram @porciussdr
+                </a>
+                <span>·</span>
+                <a
+                  href="tel:+254799278511"
+                  style={{ color: '#FBBF24', textDecoration: 'none' }}
+                >
+                  📞 +254 799 278 511
+                </a>
               </span>
             )}
             <span className="ticker__symbol">{item.symbol}</span>

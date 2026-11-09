@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { emitToast } from '../utils/toast'
 import { playEagleSound } from '../utils/sound'
+import { PhoneIcon, TelegramIcon, WhatsAppIcon } from './Icons'
 
 interface ContactModalProps {
   isOpen: boolean
@@ -89,6 +90,56 @@ export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
           Tell us what you need. A senior EAGLE VIX quantitative systems engineer will pick it up,
           and the average response time on the desk is under 15 minutes.
         </p>
+
+        <div
+          style={{
+            marginTop: '1.6rem',
+            padding: '1.2rem 1.4rem',
+            background: 'rgba(0, 240, 255, 0.05)',
+            border: '1px solid rgba(0, 240, 255, 0.25)',
+            borderRadius: '8px',
+            display: 'flex',
+            flexDirection: 'column',
+            gap: '0.8rem',
+          }}
+        >
+          <div className="fs-sm" style={{ color: '#00F0FF', fontWeight: 700, letterSpacing: '0.05em' }}>
+            ⚡ INSTANT VIP REACH CHANNELS:
+          </div>
+          <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.8rem' }}>
+            <a
+              href="https://t.me/porciussdr"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="button button--ghost"
+              style={{ fontSize: '1.15rem', padding: '0.5rem 1rem', display: 'inline-flex', alignItems: 'center', gap: '0.5rem' }}
+              onClick={() => playEagleSound('click')}
+            >
+              <TelegramIcon size={14} />
+              <span>Telegram: <strong>@porciussdr</strong></span>
+            </a>
+            <a
+              href="tel:+254799278511"
+              className="button button--ghost"
+              style={{ fontSize: '1.15rem', padding: '0.5rem 1rem', display: 'inline-flex', alignItems: 'center', gap: '0.5rem' }}
+              onClick={() => playEagleSound('click')}
+            >
+              <PhoneIcon size={14} />
+              <span>Call: <strong>+254 799 278 511</strong></span>
+            </a>
+            <a
+              href="https://wa.me/254799278511"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="button button--ghost"
+              style={{ fontSize: '1.15rem', padding: '0.5rem 1rem', display: 'inline-flex', alignItems: 'center', gap: '0.5rem' }}
+              onClick={() => playEagleSound('click')}
+            >
+              <WhatsAppIcon size={14} />
+              <span>WhatsApp</span>
+            </a>
+          </div>
+        </div>
 
         {sent ? (
           <div className="support-form__success" style={{ marginTop: '2.4rem' }}>

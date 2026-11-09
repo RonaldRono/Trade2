@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import { FOOTER_EXTENSION, FOOTER_LINKS, FOOTER_LOGO, type HeroSectionData } from '../data/content'
 import ContactModal from './ContactModal'
 import HeroV3 from './HeroV3'
-import { HeadsetIcon, MailIcon, RadioIcon, TerminalIcon } from './Icons'
+import { HeadsetIcon, MailIcon, PhoneIcon, TelegramIcon, TerminalIcon } from './Icons'
 import { emitToast } from '../utils/toast'
 import { playEagleSound } from '../utils/sound'
 
@@ -18,10 +18,16 @@ interface FooterProps {
 
 const CHANNEL_LINKS = [
   {
-    label: 'VIP Desk Telegram',
+    label: 'VIP Desk Telegram (@porciussdr)',
     href: 'https://t.me/porciussdr',
     external: true,
-    icon: <RadioIcon size={16} />,
+    icon: <TelegramIcon size={16} />,
+  },
+  {
+    label: 'Direct Phone (+254 799 278 511)',
+    href: 'tel:+254799278511',
+    external: false,
+    icon: <PhoneIcon size={16} />,
   },
   {
     label: 'Email the trading desk',
@@ -151,24 +157,46 @@ export default function Footer({ showExtension = true, extension }: FooterProps)
                     ))}
                   </nav>
 
-                  <button
-                    type="button"
-                    className="footer__contact-button"
-                    aria-label="Open contact form"
-                    onClick={() => {
-                      playEagleSound('click')
-                      setContactOpen(true)
-                    }}
-                  >
-                    Contact Us
-                    <span className="icon arrow-button__icon icon--arrow">
-                      <span className="icon__solid">
-                        <svg width="16" height="17" viewBox="0 0 16 17" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                          <path d="M1 15.4907L14.9814 1.50928M14.9814 1.50928H1M14.9814 1.50928V15.4907" stroke="currentColor" strokeWidth="1.5" />
-                        </svg>
+                  <div style={{ display: 'flex', flexWrap: 'wrap', gap: '1rem', alignItems: 'center' }}>
+                    <button
+                      type="button"
+                      className="footer__contact-button"
+                      aria-label="Open contact form"
+                      onClick={() => {
+                        playEagleSound('click')
+                        setContactOpen(true)
+                      }}
+                    >
+                      Contact Us
+                      <span className="icon arrow-button__icon icon--arrow">
+                        <span className="icon__solid">
+                          <svg width="16" height="17" viewBox="0 0 16 17" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                            <path d="M1 15.4907L14.9814 1.50928M14.9814 1.50928H1M14.9814 1.50928V15.4907" stroke="currentColor" strokeWidth="1.5" />
+                          </svg>
+                        </span>
                       </span>
-                    </span>
-                  </button>
+                    </button>
+                    <a
+                      href="https://t.me/porciussdr"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="button button--ghost"
+                      style={{ fontSize: '1.15rem', padding: '0.7rem 1.2rem', display: 'inline-flex', alignItems: 'center', gap: '0.6rem' }}
+                      onClick={() => playEagleSound('click')}
+                    >
+                      <TelegramIcon size={14} />
+                      <span>Telegram @porciussdr</span>
+                    </a>
+                    <a
+                      href="tel:+254799278511"
+                      className="button button--ghost"
+                      style={{ fontSize: '1.15rem', padding: '0.7rem 1.2rem', display: 'inline-flex', alignItems: 'center', gap: '0.6rem' }}
+                      onClick={() => playEagleSound('click')}
+                    >
+                      <PhoneIcon size={14} />
+                      <span>+254 799 278 511</span>
+                    </a>
+                  </div>
                 </div>
               </div>
 

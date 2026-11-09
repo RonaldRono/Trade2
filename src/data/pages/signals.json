@@ -1,180 +1,210 @@
-﻿{
-    "slug":  "signals",
-    "title":  "VIP Real-Time Trading Signals | EAGLE VIX SOLUTIONS",
-    "description":  "Real-time entry coordinates for Boom, Crash and synthetic indices beamed straight to a private Telegram channel. 15 to 30 verified spike signals daily with precise entry, stop loss and multi-target take profits.",
-    "heroImage":  "/images/mobile-trading.jpg",
-    "heroImageAlt":  "Live mobile trading execution receiving signals",
-    "isExtendedFooterEnabled":  true,
-    "extendedFooterHeading":  "Never run a chart again",
-    "extendedFooterText":  "Our cluster servers dispatch high-probability sniper entries directly to your device, calculated via the Prime Spike v3.2 Cluster Accumulator.",
-    "extendedFooterImage":  {
-                                "src":  "/images/mobile-trading.jpg",
-                                "width":  2880,
-                                "height":  1620,
-                                "description":  "Live mobile trading execution"
-                            },
-    "extendedFooterCta":  {
-                              "label":  "Join VIP Signals",
-                              "url":  "#membership"
-                          },
+{
+  "slug": "signals",
+  "title": "VIP Real-Time Trading Signals | EAGLE VIX SOLUTIONS",
+  "description": "Real-time entry coordinates for Boom, Crash and synthetic indices beamed straight to a private Telegram channel. 15 to 30 verified spike signals daily with precise entry, stop loss and multi-target take profits.",
+  "heroImage": "/images/mobile-trading.jpg",
+  "heroImageAlt": "Live mobile trading execution receiving signals",
+  "isExtendedFooterEnabled": true,
+  "extendedFooterHeading": "Never run a chart again",
+  "extendedFooterText": "Our cluster servers dispatch high-probability sniper entries directly to your device, calculated via the Prime Spike v3.2 Cluster Accumulator.",
+  "extendedFooterImage": {
+    "src": "/images/mobile-trading.jpg",
+    "width": 2880,
+    "height": 1620,
+    "description": "Live mobile trading execution"
+  },
+  "extendedFooterCta": {
+    "label": "Open Telegram @porciussdr",
+    "url": "https://t.me/porciussdr",
+    "isTargetBlank": true
+  },
   "sections": [
     {
       "__typename": "TickerStrip",
       "id": "market-ticker",
       "items": [
-        { "symbol": "BOOM 1000", "price": 14284.5, "change": "+2.84%", "up": true },
-        { "symbol": "CRASH 1000", "price": 8912.3, "change": "-1.15%", "up": false },
-        { "symbol": "BOOM 500", "price": 4120.8, "change": "+4.12%", "up": true },
-        { "symbol": "CRASH 500", "price": 3840.1, "change": "-0.89%", "up": false },
-        { "symbol": "PAIN X (Weltrade)", "price": 1842.1, "change": "+6.40%", "up": true },
-        { "symbol": "GAIN X (Weltrade)", "price": 2190.5, "change": "+1.25%", "up": true }
+        {
+          "symbol": "BOOM 1000",
+          "price": 14284.5,
+          "change": "+2.84%",
+          "up": true
+        },
+        {
+          "symbol": "CRASH 1000",
+          "price": 8912.3,
+          "change": "-1.15%",
+          "up": false
+        },
+        {
+          "symbol": "BOOM 500",
+          "price": 4120.8,
+          "change": "+4.12%",
+          "up": true
+        },
+        {
+          "symbol": "CRASH 500",
+          "price": 3840.1,
+          "change": "-0.89%",
+          "up": false
+        },
+        {
+          "symbol": "PAIN X (Weltrade)",
+          "price": 1842.1,
+          "change": "+6.40%",
+          "up": true
+        },
+        {
+          "symbol": "GAIN X (Weltrade)",
+          "price": 2190.5,
+          "change": "+1.25%",
+          "up": true
+        }
       ]
     },
     {
       "__typename": "SignalFeed",
-                         "id":  "vip-signals",
-                         "signals":  [
-                                         {
-                                             "id":  "SIG-1049",
-                                             "asset":  "BOOM 1000",
-                                             "broker":  "Deriv",
-                                             "type":  "BUY SPIKE",
-                                             "entry":  14210.4,
-                                             "sl":  14195.0,
-                                             "tp1":  14260.0,
-                                             "tp2":  14320.0,
-                                             "confidence":  "97.8%",
-                                             "time":  "1 min ago",
-                                             "status":  "ACTIVE ENTRY"
-                                         },
-                                         {
-                                             "id":  "SIG-1048",
-                                             "asset":  "CRASH 500",
-                                             "broker":  "Deriv",
-                                             "type":  "SELL SPIKE",
-                                             "entry":  3845.2,
-                                             "sl":  3855.0,
-                                             "tp1":  3810.0,
-                                             "tp2":  3770.0,
-                                             "confidence":  "95.4%",
-                                             "time":  "5 mins ago",
-                                             "status":  "TP1 HIT (+35 pts)"
-                                         },
-                                         {
-                                             "id":  "SIG-1047",
-                                             "asset":  "PAIN X",
-                                             "broker":  "Weltrade",
-                                             "type":  "BUY REVERSAL",
-                                             "entry":  1840.1,
-                                             "sl":  1828.0,
-                                             "tp1":  1875.0,
-                                             "tp2":  1910.0,
-                                             "confidence":  "98.2%",
-                                             "time":  "14 mins ago",
-                                             "status":  "RUNNING (+32 pts)"
-                                         },
-                                         {
-                                             "id":  "SIG-1046",
-                                             "asset":  "BOOM 500",
-                                             "broker":  "Deriv",
-                                             "type":  "BUY SPIKE",
-                                             "entry":  4118.0,
-                                             "sl":  4104.0,
-                                             "tp1":  4165.0,
-                                             "tp2":  4210.0,
-                                             "confidence":  "94.9%",
-                                             "time":  "32 mins ago",
-                                             "status":  "TP2 SECURED (+92 pts)"
-                                         }
-                                     ],
-                         "membership":  {
-                                            "heading":  "Get every entry delivered live to your phone",
-                                            "text":  "Join our exclusive private channel for Deriv and Weltrade. Our cluster servers dispatch high-probability sniper entries directly straight to your device.",
-                                            "image":  "/images/hero-mobile.jpg",
-                                            "imageAlt":  "Live mobile trading execution",
-                                            "bullets":  [
-                                                            "15 to 30 verified spike signals daily",
-                                                            "Full Boom and Crash 1000 / 500 / 300 coverage",
-                                                            "Weltrade Pain X and Gain X exclusive hybrid entries",
-                                                            "Precise entry, stop loss and multi-target take profits"
-                                                        ],
-                                            "price":  "$49.00",
-                                            "period":  "/ mo",
-                                            "cta":  {
-                                                        "label":  "Join VIP Signals",
-                                                        "url":  "#membership"
-                                                    },
-                                            "footnote":  "Telegram bot latency 0.05s Â· online 24/7"
-                                        }
-                     },
-                     {
-                         "__typename":  "StatGrid",
-                         "id":  "signal-stats",
-                         "eyebrow":  "Channel performance",
-                         "heading":  "Why the channel outperforms a manual screen",
-                         "text":  "The VIP desk runs the same models we ship as indicators â€” you simply receive the output instead of hunting for it.",
-                         "stats":  [
-                                       {
-                                           "value":  "15-30",
-                                           "label":  "Signals Daily",
-                                           "detail":  "Verified entries dispatched to the private channel every trading day.",
-                                           "tone":  "accent"
-                                       },
-                                       {
-                                           "value":  "95.2%",
-                                           "label":  "Average Accuracy",
-                                           "detail":  "Measured live accuracy of the Prime Spike cluster accumulator.",
-                                           "tone":  "green"
-                                       },
-                                       {
-                                           "value":  "0.05s",
-                                           "label":  "Bot Latency",
-                                           "detail":  "From cluster detection to a push notification on your device.",
-                                           "tone":  "amber"
-                                       },
-                                       {
-                                           "value":  "24/7",
-                                           "label":  "Always On",
-                                           "detail":  "The cluster servers never sleep, so a spike is never missed.",
-                                           "tone":  "violet"
-                                       }
-                                   ]
-                     },
-                     {
-                         "__typename":  "FaqAccordion",
-                         "id":  "signal-faq",
-                         "eyebrow":  "Before you subscribe",
-                         "heading":  "Questions the VIP desk hears every week",
-                         "items":  [
-                                       {
-                                           "question":  "Do your MT5 indicators repaint?",
-                                           "answer":  "No. Our calculation models strictly bind to closed micro-ticks. Once an entry arrow prints, it remains permanently on your MT5 chart history."
-                                       },
-                                       {
-                                           "question":  "Can I use the indicators on mobile phone (Android / iOS)?",
-                                           "answer":  "MT5 indicators (.ex5) run on Windows PC or VPS. However, our VIP Signals Channel sends identical real-time entry alerts directly to your mobile phone via Telegram."
-                                       },
-                                       {
-                                           "question":  "What is the recommended minimum starting balance?",
-                                           "answer":  "For Boom 1000 and Crash 1000, you can start with as little as $50 - $100. For the $100k Challenge, the entry requirement is exactly $100.00."
-                                       },
-                                       {
-                                           "question":  "How fast do I receive my download and license key?",
-                                           "answer":  "Instantly and automatically. As soon as your crypto payment confirms on the blockchain, your license key and .ex5 download package unlock right on your screen."
-                                       }
-                                   ]
-                     },
-                     {
-                         "__typename":  "Cta",
-                         "id":  "terminal-cta",
-                         "heading":  "See the raw feed before you subscribe",
-                         "text":  "The live terminal shows the same cluster accumulation, radar probability and spike capture maths that drives every VIP alert.",
-                         "backgroundImage":  "/images/signal-room.jpg",
-                         "cta":  {
-                                     "label":  "Open Live Terminal",
-                                     "url":  "/terminal"
-                                 }
-                     }
-                 ]
+      "id": "vip-signals",
+      "signals": [
+        {
+          "id": "SIG-1049",
+          "asset": "BOOM 1000",
+          "broker": "Deriv",
+          "type": "BUY SPIKE",
+          "entry": 14210.4,
+          "sl": 14195,
+          "tp1": 14260,
+          "tp2": 14320,
+          "confidence": "97.8%",
+          "time": "1 min ago",
+          "status": "ACTIVE ENTRY"
+        },
+        {
+          "id": "SIG-1048",
+          "asset": "CRASH 500",
+          "broker": "Deriv",
+          "type": "SELL SPIKE",
+          "entry": 3845.2,
+          "sl": 3855,
+          "tp1": 3810,
+          "tp2": 3770,
+          "confidence": "95.4%",
+          "time": "5 mins ago",
+          "status": "TP1 HIT (+35 pts)"
+        },
+        {
+          "id": "SIG-1047",
+          "asset": "PAIN X",
+          "broker": "Weltrade",
+          "type": "BUY REVERSAL",
+          "entry": 1840.1,
+          "sl": 1828,
+          "tp1": 1875,
+          "tp2": 1910,
+          "confidence": "98.2%",
+          "time": "14 mins ago",
+          "status": "RUNNING (+32 pts)"
+        },
+        {
+          "id": "SIG-1046",
+          "asset": "BOOM 500",
+          "broker": "Deriv",
+          "type": "BUY SPIKE",
+          "entry": 4118,
+          "sl": 4104,
+          "tp1": 4165,
+          "tp2": 4210,
+          "confidence": "94.9%",
+          "time": "32 mins ago",
+          "status": "TP2 SECURED (+92 pts)"
+        }
+      ],
+      "membership": {
+        "heading": "Get every entry delivered live to your phone",
+        "text": "Join our exclusive private channel for Deriv and Weltrade. Our cluster servers dispatch high-probability sniper entries directly straight to your device.",
+        "image": "/images/hero-mobile.jpg",
+        "imageAlt": "Live mobile trading execution",
+        "bullets": [
+          "15 to 30 verified spike signals daily",
+          "Full Boom and Crash 1000 / 500 / 300 coverage",
+          "Weltrade Pain X and Gain X exclusive hybrid entries",
+          "Precise entry, stop loss and multi-target take profits"
+        ],
+        "price": "$49.00",
+        "period": "/ mo",
+        "cta": {
+          "label": "Join VIP Signals",
+          "url": "#membership"
+        },
+        "footnote": "Telegram bot latency 0.05s Â· online 24/7"
+      }
+    },
+    {
+      "__typename": "StatGrid",
+      "id": "signal-stats",
+      "eyebrow": "Channel performance",
+      "heading": "Why the channel outperforms a manual screen",
+      "text": "The VIP desk runs the same models we ship as indicators â€” you simply receive the output instead of hunting for it.",
+      "stats": [
+        {
+          "value": "15-30",
+          "label": "Signals Daily",
+          "detail": "Verified entries dispatched to the private channel every trading day.",
+          "tone": "accent"
+        },
+        {
+          "value": "95.2%",
+          "label": "Average Accuracy",
+          "detail": "Measured live accuracy of the Prime Spike cluster accumulator.",
+          "tone": "green"
+        },
+        {
+          "value": "0.05s",
+          "label": "Bot Latency",
+          "detail": "From cluster detection to a push notification on your device.",
+          "tone": "amber"
+        },
+        {
+          "value": "24/7",
+          "label": "Always On",
+          "detail": "The cluster servers never sleep, so a spike is never missed.",
+          "tone": "violet"
+        }
+      ]
+    },
+    {
+      "__typename": "FaqAccordion",
+      "id": "signal-faq",
+      "eyebrow": "Before you subscribe",
+      "heading": "Questions the VIP desk hears every week",
+      "items": [
+        {
+          "question": "Do your MT5 indicators repaint?",
+          "answer": "No. Our calculation models strictly bind to closed micro-ticks. Once an entry arrow prints, it remains permanently on your MT5 chart history."
+        },
+        {
+          "question": "Can I use the indicators on mobile phone (Android / iOS)?",
+          "answer": "MT5 indicators (.ex5) run on Windows PC or VPS. However, our VIP Signals Channel sends identical real-time entry alerts directly to your mobile phone via Telegram."
+        },
+        {
+          "question": "What is the recommended minimum starting balance?",
+          "answer": "For Boom 1000 and Crash 1000, you can start with as little as $50 - $100. For the $100k Challenge, the entry requirement is exactly $100.00."
+        },
+        {
+          "question": "How fast do I receive my download and license key?",
+          "answer": "Instantly and automatically. As soon as your crypto payment confirms on the blockchain, your license key and .ex5 download package unlock right on your screen."
+        }
+      ]
+    },
+    {
+      "__typename": "Cta",
+      "id": "terminal-cta",
+      "heading": "See the raw feed before you subscribe",
+      "text": "The live terminal shows the same cluster accumulation, radar probability and spike capture maths that drives every VIP alert.",
+      "backgroundImage": "/images/signal-room.jpg",
+      "cta": {
+        "label": "Open Live Terminal",
+        "url": "/terminal"
+      }
+    }
+  ]
 }
-

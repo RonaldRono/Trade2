@@ -1,36 +1,36 @@
-﻿{
-    "slug":  "contact",
-    "title":  "Contact VIP Trading Desk | EAGLE VIX SOLUTIONS",
-    "description":  "Need assistance setting up your MT5 indicators, connecting a remote VPS, or have questions regarding the $100k Challenge? Our engineers are on standby 24/7.",
-    "heroImage":  "/images/global-desk.jpg",
-    "heroImageAlt":  "24/7 trading desk support engineers",
-    "isExtendedFooterEnabled":  true,
-    "extendedFooterHeading":  "Global desk active",
-    "extendedFooterText":  "Average response time under 15 minutes, around the clock, on every support channel.",
-    "extendedFooterImage":  {
-                                "src":  "/images/global-desk.jpg",
-                                "width":  2880,
-                                "height":  1620,
-                                "description":  "24/7 trading desk support"
-                            },
-    "extendedFooterCta":  {
-                              "label":  "Open Telegram",
-                              "url":  "https://t.me/ethanglobalsolutions",
-                              "isTargetBlank":  true
-                          },
-    "sections":  [
-                     {
+{
+  "slug": "contact",
+  "title": "Contact VIP Trading Desk | EAGLE VIX SOLUTIONS",
+  "description": "Need assistance setting up your MT5 indicators, connecting a remote VPS, or have questions regarding the $100k Challenge? Our engineers are on standby 24/7.",
+  "heroImage": "/images/global-desk.jpg",
+  "heroImageAlt": "24/7 trading desk support engineers",
+  "isExtendedFooterEnabled": true,
+  "extendedFooterHeading": "Global desk active",
+  "extendedFooterText": "Average response time under 15 minutes, around the clock, on every support channel.",
+  "extendedFooterImage": {
+    "src": "/images/global-desk.jpg",
+    "width": 2880,
+    "height": 1620,
+    "description": "24/7 trading desk support"
+  },
+  "extendedFooterCta": {
+    "label": "Open Telegram @porciussdr",
+    "url": "https://t.me/porciussdr",
+    "isTargetBlank": true
+  },
+  "sections": [
+    {
       "__typename": "SupportForm",
       "id": "support-desk",
       "mode": "support",
       "subjects": [
-                                          "Indicator Installation Support",
-                                          "100k Challenge Bridge Assistance",
-                                          "License Key HWID Reset",
-                                          "Custom EA or Algorithm Request",
-                                          "Crypto Payment Verification"
-                                      ]
-                     },
+        "Indicator Installation Support",
+        "100k Challenge Bridge Assistance",
+        "License Key HWID Reset",
+        "Custom EA or Algorithm Request",
+        "Crypto Payment Verification"
+      ]
+    },
     {
       "__typename": "MediaFigure",
       "id": "settlement-rails",
@@ -41,63 +41,67 @@
     },
     {
       "__typename": "FaqAccordion",
-                         "id":  "support-faq",
-                         "eyebrow":  "Frequently asked questions",
-                         "heading":  "Answers from the trading systems desk",
-                         "items":  [
-                                       {
-                                           "question":  "Do your MT5 indicators repaint?",
-                                           "answer":  "No. Our calculation models strictly bind to closed micro-ticks. Once an entry arrow prints, it remains permanently on your MT5 chart history."
-                                       },
-                                       {
-                                           "question":  "Can I use the indicators on mobile phone (Android / iOS)?",
-                                           "answer":  "MT5 indicators (.ex5) run on Windows PC or VPS. However, our VIP Signals Channel sends identical real-time entry alerts directly to your mobile phone via Telegram."
-                                       },
-                                       {
-                                           "question":  "What is the recommended minimum starting balance?",
-                                           "answer":  "For Boom 1000 and Crash 1000, you can start with as little as $50 - $100. For the $100k Challenge, the entry requirement is exactly $100.00."
-                                       },
-                                       {
-                                           "question":  "How fast do I receive my download and license key?",
-                                           "answer":  "Instantly and automatically. As soon as your crypto payment confirms on the blockchain, your license key and .ex5 download package unlock right on your screen."
-                                       }
-                                   ]
-                     },
-                     {
-                         "__typename":  "ValuesModule",
-                         "id":  "desk-channels",
-                         "eyebrow":  "Direct channels",
-                         "heading":  "Reach the desk directly",
-                         "text":  "Skip the form when you need a fast answer on an installation or licence question.",
-                         "values":  [
-                                        {
-                                            "title":  "Direct Telegram",
-                                            "text":  "@ethanglobalsolutions â€” fastest route for licence and installation questions.",
-                                            "icon":  "telegram"
-                                        },
-                                        {
-                                            "title":  "VIP desk email",
-                                            "text":  "support@eaglevixsolutions.com â€” for bridge enquiries, invoices and custom algorithm requests.",
-                                            "icon":  "mail"
-                                        },
-                                        {
-                                            "title":  "24/7 engineering cover",
-                                            "text":  "Senior trading systems engineers answer in under 15 minutes, every hour of the day.",
-                                            "icon":  "headset"
-                                        }
-                                    ]
-                     },
-                     {
-                         "__typename":  "Cta",
-                         "id":  "contact-cta",
-                         "heading":  "Already have an account?",
-                         "text":  "Manage licences, reset hardware IDs and monitor copy-trade telemetry from the client terminal.",
-                         "backgroundImage":  "/images/vps-nodes.jpg",
-                         "cta":  {
-                                     "label":  "Open My Account",
-                                     "url":  "/account"
-                                 }
-                     }
-                 ]
+      "id": "support-faq",
+      "eyebrow": "Frequently asked questions",
+      "heading": "Answers from the trading systems desk",
+      "items": [
+        {
+          "question": "Do your MT5 indicators repaint?",
+          "answer": "No. Our calculation models strictly bind to closed micro-ticks. Once an entry arrow prints, it remains permanently on your MT5 chart history."
+        },
+        {
+          "question": "Can I use the indicators on mobile phone (Android / iOS)?",
+          "answer": "MT5 indicators (.ex5) run on Windows PC or VPS. However, our VIP Signals Channel sends identical real-time entry alerts directly to your mobile phone via Telegram."
+        },
+        {
+          "question": "What is the recommended minimum starting balance?",
+          "answer": "For Boom 1000 and Crash 1000, you can start with as little as $50 - $100. For the $100k Challenge, the entry requirement is exactly $100.00."
+        },
+        {
+          "question": "How fast do I receive my download and license key?",
+          "answer": "Instantly and automatically. As soon as your crypto payment confirms on the blockchain, your license key and .ex5 download package unlock right on your screen."
+        }
+      ]
+    },
+    {
+      "__typename": "ValuesModule",
+      "id": "desk-channels",
+      "eyebrow": "Direct channels",
+      "heading": "Reach the desk directly",
+      "text": "Skip the form when you need a fast answer on an installation or licence question.",
+      "values": [
+        {
+          "title": "Direct Telegram",
+          "text": "@porciussdr — fastest route for licence and installation questions.",
+          "icon": "telegram"
+        },
+        {
+          "title": "Direct Call & WhatsApp",
+          "text": "+254799278511 — 24/7 direct priority line.",
+          "icon": "phone"
+        },
+        {
+          "title": "VIP desk email",
+          "text": "support@eaglevixsolutions.com — for bridge enquiries, invoices and custom algorithm requests.",
+          "icon": "mail"
+        },
+        {
+          "title": "24/7 engineering cover",
+          "text": "Senior trading systems engineers answer in under 15 minutes, every hour of the day.",
+          "icon": "headset"
+        }
+      ]
+    },
+    {
+      "__typename": "Cta",
+      "id": "contact-cta",
+      "heading": "Already have an account?",
+      "text": "Manage licences, reset hardware IDs and monitor copy-trade telemetry from the client terminal.",
+      "backgroundImage": "/images/vps-nodes.jpg",
+      "cta": {
+        "label": "Open My Account",
+        "url": "/account"
+      }
+    }
+  ]
 }
-

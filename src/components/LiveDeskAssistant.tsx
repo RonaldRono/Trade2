@@ -1,6 +1,8 @@
 import { useEffect, useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { playEagleSound } from '../utils/sound'
+import { handleTelegramClick, TELEGRAM_URL } from '../utils/telegram'
+import { PhoneIcon, TelegramIcon, WhatsAppIcon } from './Icons'
 
 interface Message {
   id: string
@@ -15,6 +17,7 @@ interface Message {
 }
 
 const PRESET_QUESTIONS = [
+  '✈️ Contact @porciussdr on Telegram / Call',
   '🔥 How do I catch Boom & Crash spikes?',
   '⚡ Which broker: Deriv or Weltrade?',
   '📈 How does the $100k Challenge work?',
@@ -23,6 +26,11 @@ const PRESET_QUESTIONS = [
 ]
 
 const AI_RESPONSES: Record<string, { reply: string; action?: { label: string; to?: string; href?: string } }> = {
+  '✈️ Contact @porciussdr on Telegram / Call': {
+    reply:
+      'Direct VIP Trading Desk Contacts:\n• Telegram: @porciussdr (Fastest route - 24/7)\n• Direct Hotline / WhatsApp: +254 799 278 511\n• Email: support@eaglevixsolutions.com\n\nClick below to start a direct Telegram chat with our senior trading systems engineer!',
+    action: { label: 'Open Telegram @porciussdr', href: 'https://t.me/porciussdr' },
+  },
   '🔥 How do I catch Boom & Crash spikes?': {
     reply:
       'Eagle Vix Prime Spike v3.2 detects micro-tick liquidity clusters 3 to 12 ticks before execution on MT5. It calculates order accumulation with a 95.2% win rate and alerts with instant arrows. Test it directly on our interactive live terminal!',
@@ -56,7 +64,7 @@ export default function LiveDeskAssistant() {
     {
       id: 'welcome',
       sender: 'desk',
-      text: 'Welcome to EAGLE VIX SOLUTIONS Desk. How can our quantitative systems team assist your trading today?',
+      text: 'Welcome to EAGLE VIX SOLUTIONS Desk. Need fast assistance? Reach our lead engineer directly on Telegram @porciussdr or call +254 799 278 511.',
       time: 'Live',
     },
   ])
@@ -120,21 +128,46 @@ export default function LiveDeskAssistant() {
 
   return (
     <>
-      {/* Floating launcher trigger */}
-      <button
-        type="button"
-        className={`eagle-desk-launcher${isOpen ? ' is-active' : ''}`}
-        aria-label="Open EAGLE VIX VIP Trading Desk Assistant"
-        onClick={() => {
-          setIsOpen((prev) => !prev)
-          playEagleSound('click')
-        }}
-      >
-        <span className="eagle-desk-launcher__pulse" />
-        <span className="eagle-desk-launcher__icon">🦅</span>
-        <span className="eagle-desk-launcher__label">EAGLE VIX DESK</span>
-        <span className="eagle-desk-launcher__badge">LIVE</span>
-      </button>
+      {/* Floating launcher trigger with quick-contact shortcuts */}
+      <div className="eagle-desk-launcher-container">
+        <a
+          href={TELEGRAM_URL}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="eagle-floating-quick-btn eagle-floating-quick-btn--tg"
+          title="Direct Telegram @porciussdr"
+          onClick={handleTelegramClick}
+          style={{ cursor: 'pointer', pointerEvents: 'all' }}
+        >
+          <TelegramIcon size={16} />
+          <span className="eagle-floating-quick-btn__text">@porciussdr</span>
+        </a>
+
+        <a
+          href="tel:+254799278511"
+          className="eagle-floating-quick-btn eagle-floating-quick-btn--phone"
+          title="Direct Call +254 799 278 511"
+          onClick={() => playEagleSound('click')}
+        >
+          <PhoneIcon size={16} />
+          <span className="eagle-floating-quick-btn__text">+254 799 278 511</span>
+        </a>
+
+        <button
+          type="button"
+          className={`eagle-desk-launcher${isOpen ? ' is-active' : ''}`}
+          aria-label="Open EAGLE VIX VIP Trading Desk Assistant"
+          onClick={() => {
+            setIsOpen((prev) => !prev)
+            playEagleSound('click')
+          }}
+        >
+          <span className="eagle-desk-launcher__pulse" />
+          <span className="eagle-desk-launcher__icon">🦅</span>
+          <span className="eagle-desk-launcher__label">VIP DESK</span>
+          <span className="eagle-desk-launcher__badge">LIVE</span>
+        </button>
+      </div>
 
       {/* Floating interactive chat panel */}
       {isOpen && (
@@ -158,6 +191,84 @@ export default function LiveDeskAssistant() {
             >
               ✕
             </button>
+          </div>
+
+          {/* Quick Direct Reach Bar inside Chat */}
+          <div
+            style={{
+              padding: '0.9rem 1.4rem',
+              background: 'rgba(34, 211, 238, 0.08)',
+              borderBottom: '1px solid rgba(34, 211, 238, 0.2)',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'space-between',
+              gap: '0.6rem',
+              flexWrap: 'wrap',
+            }}
+          >
+            <span className="fs-sm" style={{ color: '#22D3EE', fontWeight: 700, letterSpacing: '0.04em' }}>
+              DIRECT REACH:
+            </span>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem', flexWrap: 'wrap' }}>
+              <a
+                href="https://t.me/porciussdr"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="button button--ghost"
+                style={{
+                  fontSize: '1.1rem',
+                  padding: '0.4rem 0.8rem',
+                  borderRadius: '4px',
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  gap: '0.4rem',
+                  borderColor: 'rgba(34, 211, 238, 0.4)',
+                  color: '#22D3EE',
+                }}
+                onClick={() => playEagleSound('click')}
+              >
+                <TelegramIcon size={12} />
+                <span>@porciussdr</span>
+              </a>
+              <a
+                href="tel:+254799278511"
+                className="button button--ghost"
+                style={{
+                  fontSize: '1.1rem',
+                  padding: '0.4rem 0.8rem',
+                  borderRadius: '4px',
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  gap: '0.4rem',
+                  borderColor: 'rgba(251, 191, 36, 0.4)',
+                  color: '#FBBF24',
+                }}
+                onClick={() => playEagleSound('click')}
+              >
+                <PhoneIcon size={12} />
+                <span>+254 799 278 511</span>
+              </a>
+              <a
+                href="https://wa.me/254799278511"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="button button--ghost"
+                style={{
+                  fontSize: '1.1rem',
+                  padding: '0.4rem 0.8rem',
+                  borderRadius: '4px',
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  gap: '0.4rem',
+                  borderColor: 'rgba(52, 211, 153, 0.4)',
+                  color: '#34D399',
+                }}
+                onClick={() => playEagleSound('click')}
+              >
+                <WhatsAppIcon size={12} />
+                <span>WhatsApp</span>
+              </a>
+            </div>
           </div>
 
           <div className="eagle-desk-panel__body">
